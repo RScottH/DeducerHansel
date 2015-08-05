@@ -1,0 +1,12 @@
+Package: TestRFunction
+Version: 0.1-1
+Date: 2015-04-10
+Title: TestRFunction
+Author: Test by Scott Hacker
+Maintainer: Scott Hacker<hasc@jibs.hj.se>
+Description: Testing uploading R package onto Github
+Depends: Deducer
+License: GPL-2
+URL: http://www.deducer.org/pmwiki/index.php?n=Main.Development
+Repository: CRAN
+Date/Publication: 2015-08-11 12:44:53
