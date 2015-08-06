@@ -28,6 +28,7 @@
 # with modifications made on 2015-03-10.
 #
 ##############
+
 	
 .onLoad <- function(libname, pkgname) { 
 	
