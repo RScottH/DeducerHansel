@@ -1,12 +1,12 @@
-Package: TestRFunction
-Version: 0.1-1
-Date: 2015-04-10
-Title: TestRFunction
-Author: Test by Scott Hacker
-Maintainer: Scott Hacker<hasc@jibs.hj.se>
-Description: Testing uploading R package onto Github
+Package: DeducerHansel
+Version: 0.4-1.001
+Date: 2015-03-13
+Title: Deducer Plug-in Hansel
+Author: R. Scott H/\ker (replace "/\" with "ac")
+Maintainer:  R. Scott H/\ker (replace "/\" with "ac"), <hasc@jibs.hj.se>
+Description: A Econometrics plug-in package for Deducer.
 Depends: Deducer
 License: GPL-2
-URL: http://www.deducer.org/pmwiki/index.php?n=Main.Development
-Repository: CRAN
-Date/Publication: 2015-08-11 12:44:53
+URL: http://rscotth.github.io/DeducerHansel
+Repository: http://rscotth.github.io/DeducerHansel
+Date/Publication: 2015-08-06
