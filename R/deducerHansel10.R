@@ -25,7 +25,7 @@
 # This R file includes modified code from example.R in the DeducerPlugInExample package(0.2-0 version, dated 2012-03-16)
 # by Ian Fellows  (code that also falls under the GPL-2 license)
 # and a line of code from commander.R (dated 2013-03-14) in the Rcmdr package (dated 2013-03-14,by John Fox, license: GPL (>=2)),
-# with modifications made on 2015-03-10.
+# with modifications made on 2015-03-10,2015-08-07,2015-08-08.
 #
 ##############
 
@@ -201,8 +201,6 @@ if(exists("gretldata")){
 	cmd <- paste(cmd,")")
 	execute(cmd)
 
-
-
 	cmd <-"gretldata.zoo <<- as.zoo(gretldata)"
 	cmd <- paste(cmd,"\n TimeSeriesList.gretldata <<- attributes(gretldata.zoo)$dimnames[[2]]")
 execute(cmd)
@@ -215,9 +213,9 @@ execute(cmd)
 }
 
 # sample data for testing
-data("Anscombe",package="car") # for ols
-data(UKpppuip, package="urca") # for time series
-data("Grunfeld", package = "plm") # for panel 
+#data("Anscombe",package="car") # for ols
+#data(UKpppuip, package="urca") # for time series
+#data("Grunfeld", package = "plm") # for panel 
 #data(SwissLabor, package = "AER") #For logit & probit examples 
 #data(Affairs, package = "AER")#For tobit example
 #data("oldcol",package="spdep") #For cross-sectional spatial examples
