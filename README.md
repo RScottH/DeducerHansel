@@ -48,8 +48,7 @@ If you are using the RStudio console, the floating menu should come up automatic
 
 If you are using the R base console go to the menu 'Hansel Analysis' and click on 'Open Floating Menu' to get options available in DeducerHansel.
 
-## Using DeducerHansel with JGR console but without the JGR 
-launcher
+## Using DeducerHansel with JGR console, without JGR launcher
 
 In your R console load the DeducerHansel package and enter the command 
 
@@ -75,7 +74,7 @@ Get the universal binary (JGR*.dmg) listed which is most appropriate for your sy
 The first time you open JGR, Deducer and DeducerHansel not be loaded (if you see “Analysis” in the top menu bar, Deducer is loaded). To load Deducer and DeducerHansel, click on Packages & Data> Package Manager and find these packages in the list of packages. On each click on the left box (to load) and on the right box (to automatically load every time JGR is opened) and click on Refresh and then close the Package Manager.
 
 ## Information on Deducer
-Please check out WWW.Deducer.org for more information on Deducer.
+Please check out ( http://www.Deducer.org  ) for more information on Deducer.
 
 ## Bug reports 
 
