@@ -30,81 +30,81 @@
 ##############
 
 if("forecast" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("forecast")}
+{install.packages(c("forecast"))}
 
 if("plm" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("plm")}
+{install.packages(c("plm"))}
 
 if("strucchange" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("strucchange")}
+{install.packages(c("strucchange"))}
 
 if("vars" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("vars")}
+{install.packages(c("vars"))}
 
 if("dynlm" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("dynlm")}
+{install.packages(c("dynlm"))}
 
 if("AER" %in% rownames(installed.packages()) == FALSE)
 {install.packages(c("AER"))}
 
 if("urca" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("urca")}
+{install.packages(c("urca"))}
 
 if("vars" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("vars")}
+{install.packages(c("vars"))}
 
 if("ROCR" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("ROCR")}
+{install.packages(c("ROCR"))}
 
 if("wmtsa" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("wmtsa")}
+{install.packages(c("wmtsa"))}
 
 if("xtable" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("xtable")}
+{install.packages(c("xtable"))}
 
 if("tseries" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("tseries"),}
+{install.packages(c("tseries"))}
 
 if("zoo" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("zoo")}
+{install.packages(c("zoo"))}
 
 if("pscl" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("pscl")}
+{install.packages(c("pscl"))}
 
 if("quantmod" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("quantmod")}
+{install.packages(c("quantmod"))}
 
 
 if("rgl" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("rgl")}
+{install.packages(c("rgl"))}
 
 if("mfx" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("mfx")}
+{install.packages(c("mfx"))}
 
 if("xts" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("xts")}
+{install.packages(c("xts"))}
 
 if("latticeExtra" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("latticeExtra")}
+{install.packages(c("latticeExtra"))}
 
 if("mFilter" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("mFilter")}
+{install.packages(c("mFilter"))}
 
 if("XLConnect" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("XLConnect")}
+{install.packages(c("XLConnect"))}
 
 #For spatial methods
 if("rgdal" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("rgdal")}
+{install.packages(c("rgdal"))}
 
 if("sp" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("sp")}
+{install.packages(c("sp"))}
 
 if("spdep" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("spdep")}
+{install.packages(c("spdep"))}
 
 if("splm" %in% rownames(installed.packages()) == FALSE)
-{install.packages(c("splm")}
+{install.packages(c("splm"))}
 #End for Spatial methods
 
 
