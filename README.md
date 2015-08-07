@@ -1,8 +1,8 @@
 # DeducerHansel
-Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac"
-Professor of Applied Econometrics and International Economics
-Jönköping University
-Jönköping International Business School
+Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac",
+Professor of Applied Econometrics and International Economics,
+Jönköping University,
+Jönköping International Business School,
 Jönköping, Sweden.
 
 DeducerHansel is an econometrics-focused GUI plug-in for the
