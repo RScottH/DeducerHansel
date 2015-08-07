@@ -1,5 +1,9 @@
 # DeducerHansel
-Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac", Jönköping University, Jönköping International Business School, Jönköping, Sweden.
+Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac"
+Professor of Applied Econometrics and International Economics
+Jönköping University
+Jönköping International Business School
+Jönköping, Sweden.
 
 DeducerHansel is an econometrics-focused GUI plug-in for the
 R package Deducer. It adds a menu with additional statistical techniques that are popular in economics and various other fields. Unlike Deducer, DeducerHansel can work with some time series dand spatial data that do not come up in data frame objects. DeducerHansel also has a notably different feel to the way the user interacts with it than what is currently available in Deducer.  
@@ -91,21 +95,24 @@ The following packages provided some source code that was
 used in the DeducerHansel package. All of these packages are covered by GPLv2. 
 
 Java source code:
-     Deducer (0.7-6 version, dated 2012-12-05),
-             by Ian Fellows
-     DeducerPlugInExample (0.2-0 version, dated 2012-03-16),
-             by Ian Fellows
-     DeducerSpatial package (0.7 version, dated 2013-04-12),
-             by Ian Fellows and Alex Rickett with contributions 
+Deducer (0.7-6 version, dated 2012-12-05),
+     by Ian Fellows
+
+DeducerPlugInExample (0.2-0 version, dated 2012-03-16),
+     by Ian Fellows
+
+DeducerSpatial package (0.7 version, dated 2013-04-12),
+     by Ian Fellows and Alex Rickett with contributions 
              from Neal Fultz.             
-	JGR package (1.7 -18 version, downloaded 2015-07-15),
-             by Markus Helbig, Simon Urbanek and Ian Fellows.
+
+JGR package (1.7 -18 version, downloaded 2015-07-15),
+     by Markus Helbig, Simon Urbanek and Ian Fellows.
 
 R souce code:
-     DeducerPlugInExample (0.2-0 version, dated 2012-03-16),
-             by Ian Fellows
+DeducerPlugInExample (0.2-0 version, dated 2012-03-16),
+      by Ian Fellows
 
-     RCmdr (1.6-6 version, dated 2013-03-15) 
-             by John Fox and Milan Bouchet-Valat, with
-             various contributors
-            (one line of R code, but an important one!)
+RCmdr (1.6-6 version, dated 2013-03-15) 
+       by John Fox and Milan Bouchet-Valat, with
+       various contributors
+       (one line of R code, but an important one!)
