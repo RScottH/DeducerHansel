@@ -1,4 +1,5 @@
 exportPattern("[[:alpha:]]+")
 import(rJava,JGR,Deducer)
-import(plm,zoo)
+import(plm)
+import(zoo)
 import(forecast,strucchange,dynlm,AER,urca,vars,ROCR,wmtsa,xtable,tseries,pscl,quantmod,rgl,mfx,xts,latticeExtra,mFilter,XLConnect,rgdal,sp,spdep,splm)
