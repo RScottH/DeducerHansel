@@ -3,5 +3,6 @@ import(rJava,JGR,Deducer)
 import(plm)
 
 import(forecast)
-import (strucchange,dynlm,AER,urca,vars,ROCR,wmtsa,xtable,tseries,pscl,quantmod,rgl,mfx,xts,latticeExtra,mFilter,XLConnect,rgdal,sp,spdep,splm)
+import (strucchange)
+import(dynlm,AER,urca,vars,ROCR,wmtsa,xtable,tseries,pscl,quantmod,rgl,mfx,xts,latticeExtra,mFilter,XLConnect,rgdal,sp,spdep,splm)
 import(zoo)
