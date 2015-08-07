@@ -238,7 +238,11 @@ conditions covered by the GNU General Public License version 2 (GPLv2) license;
 for details click on the menu item 'Hansel Analysis>About DeducerHansel>License'.
 
 Note: To make the Hansel Analysis menu item initially visible in JGR, 
-you may need to hover your mouse over the JGR menu items.
+you may need to hover your mouse over the JGR menu items. In the base R console,
+under windows to get the Hansel Analysis menu you need to first choose 
+Hansel Analysis>Open Floating Menu, and in RStudio under windows the Hansel
+Analysis menu will come up automatically, although perhaps hidden behind the¨
+Rstudio console.
 
 Welcome to DeducerHansel!"
 
