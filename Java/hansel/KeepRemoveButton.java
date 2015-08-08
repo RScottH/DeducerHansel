@@ -14,7 +14,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
  The current file most notably uses the code from RemoveButton.java in the Deducer package. 
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
  */
 
 package hansel;
@@ -48,7 +48,8 @@ public class KeepRemoveButton extends IconButton implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		Object[] objs=rightList.getSelectedValuesList().toArray();
+               //Object[] objs=rightList.getSelectedValuesList().toArray();
+		Object[] objs=rightList.getSelectedValues();
 		for(int i=0;i<objs.length;i++){
 			if(objs[i]!=null){
 				if(!(leftList instanceof HanselDJList && ((HanselDJList)leftList).getTransferMode()==TransferHandler.COPY))

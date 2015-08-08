@@ -5,18 +5,19 @@ Jönköping University,
 Jönköping International Business School,
 Jönköping, Sweden.
 
-DeducerHansel is an econometrics-focused GUI plug-in for the
-R package Deducer. It adds a menu with additional statistical techniques that are popular in economics and various other fields. Unlike Deducer, DeducerHansel can work with some time series dand spatial data that do not come up in data frame objects. DeducerHansel also has a notably different feel to the way the user interacts with it than what is currently available in Deducer.  
+DeducerHansel is an econometrics-focused GUI plug-in package for the R package Deducer. It adds a menu with additional statistical techniques that are popular in economics and various other fields. Unlike the base Deducer package, DeducerHansel can work with some time series dand spatial data that do not come up in data frame objects. DeducerHansel also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package.  
 
 A copy of the _current development version_ 
 of the R-package `DeducerHansel` is contained in this repository. This package currently only has a development version.
 
 ## Where DeducerHansel works
-DeducerHansel, like the Deducer package, is most at home using the JGR console, for which a JGR launcher (discussed later) is useful. If you are using a windows operating system, DeducerHansel is also available through "floating menu" through the base R console and RStudio, but this not available in Mac OS-X. DeducerHansel has not been tested in Linux, but since Deducer works there, so should DeducerHansel.
+DeducerHansel, like the Deducer package, is most at home using the JGR console, for which a JGR launcher (discussed later) is useful. If you are using a Windows operating system, DeducerHansel is also available in a "floating menu" through the standard RGui console available in base R and through RStudio, but this floating menu is not available in Mac OS-X. DeducerHansel has not been tested in Linux, but since Deducer works there, DeducerHansel is expected to do so also.
 
 ## Installation of Java and R
 Java and R need to be installed on your computer before DeducerHansel can be used. 
+
 Java is often required for other software and you may very well already have Java installed on your computer; if not you can follow instructions at the link https://www.oracle.com/java/index.html to install Java. 
+
 Instructions for installing R are given at http://cran.r-project.org/. For a Windows-based system, if you do not have administrator status then installing R onto C:\Program Files\R-3.1.2 (typically the default; note R-3.1.2 is an example—version numbers do change) could create problems, which can be avoided by installing elsewhere, e.g. onto C:\CRAN R\R-3.1.2 instead. These problems can effect in particular the usability of the JGR launcher, discussed later, or even the installation of DeducerHansel altogether.
 
 ## Installation of DeducerHansel
@@ -42,7 +43,7 @@ In your R console load the DeducerHansel package.
 
 If you are using the RStudio console, the floating menu should come up automatically when DeducerHansel is loaded, but it may be hidden behind the RStudio console initially.
 
-If you are using the R base console go to the menu 'Hansel Analysis' and click on 'Open Floating Menu' to get options available in DeducerHansel.
+If you are using the standard RGui console go to the menu 'Hansel Analysis' and click on 'Open Floating Menu' to get options available in DeducerHansel.
 
 ## Using DeducerHansel with JGR console, without JGR launcher
 
@@ -57,7 +58,7 @@ The JGR console will pop up, and you can load DeducerHansel again there. If you 
 The nuisance of having to go through another console to get the JGR console everytime you want to use JGR is a nuisance which having the JGR launcher useful will avoid.
 
 ##Getting the JGR launcher.
-In the next section there is indicated a way to start JGR without the JGR Loader. But that will be cumbersome to do every time you wish to work with JGR. Ideally you should have the JGR launcher. 
+In the next section there is indicated a way to start JGR without the JGR launcher. But that will be cumbersome to do every time you wish to work with JGR. Ideally you should have the JGR launcher. 
 
 Go to the web page for JGR ( http://www.rforge.net/JGR/ ) to get the JGR launcher, which is an executable file with an icon that can be placed on your desktop. In that web page the launcher is found in the “Download” section after the “what’s new section” [Don’t use the “Download/Files” link at the top left of the page, as the downloads seem to be more out-of-date there]. 
 (i) windows

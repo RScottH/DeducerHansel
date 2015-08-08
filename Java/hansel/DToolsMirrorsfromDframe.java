@@ -17,7 +17,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
   ExampleDialog.java (dated 2010-03-12), found in the DeducerPlugInExample package.
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
  */
 
 package hansel;
@@ -534,7 +534,8 @@ public class DToolsMirrorsfromDframe  extends JDialog implements ActionListener 
 		}
 	}
 	public boolean valid(){
-           if (!(dataList.getSelectedValuesList().size()==1)) {
+           //if (!(dataList.getSelectedValuesList().size()==1)) {
+            if (!(dataList.getSelectedValues().length==1)) {
 			JOptionPane.showMessageDialog(this, "Please choose one data frame");
 			return false;
 		}

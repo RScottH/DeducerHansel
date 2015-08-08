@@ -14,7 +14,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
  The current file notably uses a substantial amount of code from AddButton.java from the Deducer package.
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
  */
 package hansel;
         
@@ -56,8 +56,9 @@ public class KeepAddButton extends IconButton implements ActionListener{
 		leftList = left;
 	}
 	
-	public void actionPerformed(ActionEvent arg0) {
-		Object[] objs=leftList.getSelectedValuesList().toArray();
+	public void actionPerformed(ActionEvent arg0) { 
+            //Object[] objs=leftList.getSelectedValuesList().toArray();
+		Object[] objs=leftList.getSelectedValues();
                 //The next line ses the selection to next variable not chosen
                 leftList.setSelectedIndex(leftList.getSelectedIndices()[leftList.getSelectedIndices().length-1]+1);
 		for(int i=0;i<objs.length;i++){

@@ -15,7 +15,7 @@ The code from those packages used in this one most notably come from
      GLMExplorerPlots.java and GLMExplorerPostHoc.java, found in the Deducer package
  
 The current file made adjustments to that earlier java code on 2013-07-04 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
  */
 
 
@@ -541,20 +541,6 @@ public class GMExplorerDiagTestsMain extends javax.swing.JDialog implements Acti
 		}else if(cmd=="OK"){
 			updateModel();
 			this.dispose();
-		}else if(cmd=="Add"){
-			Object[] objs=terms.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)terms.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)effects.getModel()).addElement(objs[i]);
-			}
-		}else if(cmd=="Remove"){
-			Object[] objs=effects.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)effects.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)terms.getModel()).addElement(objs[i]);
-			}
                  }else if(cmd=="Set Restrictions through Clicking"){
                          model.efeGLMOptions.coeffTestsGUI=true;	
                          this.dispose();

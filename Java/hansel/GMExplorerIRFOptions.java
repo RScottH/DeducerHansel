@@ -15,7 +15,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
      GLMExplorerPlots.java, GLMExplorerPostHoc.java, and ModelBuilder.java, found in the Deducer package
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
  */
 
 package hansel;
@@ -148,7 +148,7 @@ public class GMExplorerIRFOptions extends javax.swing.JDialog implements ActionL
 							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
 					nahead.setModel(naheadsAvailable);
                                         nahead.setFont(font12);
-					nahead.setPreferredSize(new java.awt.Dimension(60, 21));
+					nahead.setPreferredSize(new java.awt.Dimension(60, 30));
 					nahead.addActionListener(this);
 				} 
 
@@ -199,7 +199,7 @@ public class GMExplorerIRFOptions extends javax.swing.JDialog implements ActionL
 							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
 					confIntCov.setModel(confIntCovsAvailable);
                                         confIntCov.setFont(font12);
-					confIntCov.setPreferredSize(new java.awt.Dimension(60, 21));
+					confIntCov.setPreferredSize(new java.awt.Dimension(60, 30));
 					confIntCov.addActionListener(this);
 				} 
                            
@@ -292,15 +292,15 @@ public class GMExplorerIRFOptions extends javax.swing.JDialog implements ActionL
 		if(cmd=="Cancel"){
 			this.dispose();
 		}else if(cmd=="OK"){
-                     
-                       Object[] impulseTerm = impulseList.getSelectedValuesList().toArray();
+                       //Object[] impulseTerm = impulseList.getSelectedValuesList().toArray();
+                       Object[] impulseTerm = impulseList.getSelectedValues();
                         if (impulseTerm==null || !(impulseTerm.length==1))
                          {
 				JOptionPane.showMessageDialog(null, "Please select one variable for impulse");
 				return;
 			 }
-                       
-             	       Object[] plotTerms = termsList.getSelectedValuesList().toArray();
+                       //Object[] plotTerms = termsList.getSelectedValuesList().toArray();
+             	       Object[] plotTerms = termsList.getSelectedValues();
 		       if (plotTerms==null || plotTerms.length<1)
                          {
 				JOptionPane.showMessageDialog(null, "Please select at least one response variable");
@@ -317,20 +317,6 @@ public class GMExplorerIRFOptions extends javax.swing.JDialog implements ActionL
 
 			updateModel();
 			this.dispose();
-		}else if(cmd=="Add"){
-			Object[] objs=terms.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)terms.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)effects.getModel()).addElement(objs[i]);
-			}
-		}else if(cmd=="Remove"){
-			Object[] objs=effects.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)effects.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)terms.getModel()).addElement(objs[i]);
-			}
 		}
 		
 	}

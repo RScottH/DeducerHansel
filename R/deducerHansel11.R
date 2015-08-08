@@ -1,6 +1,6 @@
 
 # deducerHansel.R for the DeducerHansel program 
-#    Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac"
+# Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac"
 #
 # DeducerHansel is an econometrics-focused GUI plug-in for the
 # R package Deducer
@@ -22,10 +22,12 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  
 #    02110-1301  USA
 # 
-# This R file includes modified code from example.R in the DeducerPlugInExample package(0.2-0 version, dated 2012-03-16)
+# This R file includes modified code from example.R in the
+# DeducerPlugInExample package(0.2-0 version, dated 2012-03-16)
 # by Ian Fellows  (code that also falls under the GPL-2 license)
-# and a line of code from commander.R (dated 2013-03-14) in the Rcmdr package (dated 2013-03-14,by John Fox, license: GPL (>=2)),
-# with modifications made on 2015-03-10,2015-08-07,2015-08-08.
+# and a line of code from commander.R (dated 2013-03-14) in the
+# Rcmdr package (dated 2013-03-14,by John Fox, license: GPL (>=2)),
+# with modifications made on 2015-03-10.
 #
 ##############
 
@@ -106,9 +108,6 @@ if("spdep" %in% rownames(installed.packages()) == FALSE)
 if("splm" %in% rownames(installed.packages()) == FALSE)
 {install.packages(c("splm"))}
 #End for Spatial methods
-
-
-
 	
 .onLoad <- function(libname, pkgname) { 
 	
@@ -128,7 +127,7 @@ if("splm" %in% rownames(installed.packages()) == FALSE)
 	.jpackage("Hansel")
 ###
 
-Deducer::deducer.addMenu("Hansel Analysis")
+Deducer::deducer.addMenu("Hansel")
 Deducer::deducer.addMenuItem("Open floating menu call",,
                              "if(!.jfield('org/rosuda/deducer/Deducer','Z','started')){
                                .jcall(.deducer,,'startNoJGR')} \n
@@ -136,17 +135,25 @@ Deducer::deducer.addMenuItem("Open floating menu call",,
                               .hansel.floatMenu <- .jnew(.hansel.floatMenuClass) \n
                               .hansel.floatMenu$runit() \n
                               rm(.hansel.floatMenuClass)",
-                             "Hansel Analysis") 
-
+                             "Hansel") 
+.startInstructions <-""
 	
-if(.windowsGUI){
-      
-   #  RStudio <- nzchar(Sys.getenv("RSTUDIO_USER_IDENTITY")) # This line is based on code from commander.R in Rcmdr (by John Fox)	
+if(.windowsGUI){ #This means actually non-JGR, e.g. RGui or RStudio
+     # The next line is needed for running DeducerHansel outside of JGR, since having ls() return nothing results
+     # in the following error being repeated (I think this comes from Deducer).
+     # " Error in ls()[sapply(ls(), function(x) "data.frame" %in% class(get(x)))] : 
+     #   invalid subscript type 'list' "
+
+        DeducerHansel_NullforNonemptyList <<- NULL
+   
+     # The following line is based on code from commander.R in Rcmdr (by John Fox)	
       
       if (!(nzchar(Sys.getenv("RSTUDIO_USER_IDENTITY")))) {
-		winMenuAdd("Hansel Analysis")
+		winMenuAdd("Hansel")
 
-       winMenuAddItem("Hansel Analysis", "Open floating menu", "deducer('Open floating menu call')")
+       winMenuAddItem("Hansel", "Open floating menu", "deducer('Open floating menu call')")
+          .startInstructions <-
+"\n\nNote: To get the Hansel Analysis menu in Windows,\nclick on the Rgui console menu item Hansel>Open floating menu. "
 
         } else {  #dealing with RStudio
          # The following command limits the CPU process to 1, since otherwise (at least in Windows)
@@ -174,11 +181,12 @@ if(.windowsGUI){
 	    return(floatMenu)
                       }
 
-                       .ddcr()
+            .ddcr()
 
-                     # The next line is to have script-activated plots go to the RStudio plot panel by default.
+            # The next line is to have script-activated plots go to the RStudio plot panel by default.
                        options(device="RStudioGD") 
-          
+
+            .startInstructions <-"\n\nNote: In Windows the floating menu should pop-up automatically,\n but it may be hidden behind the RStudio console."
 
      }
 
@@ -186,11 +194,13 @@ if(.windowsGUI){
 
    HanselMenu <- J('hansel.Hansel')
    myHanselMenu <- new(HanselMenu)
+   .startInstructions <-
+"\n\nNote: To make the Hansel Analysis menu initially visible in Windows,\nyou may need to hover your mouse over the JGR menu items."
+
 }
 
 if(exists("gretldata")){
    if (!(class(gretldata)=="data.frame")){
-       print("hello")
 	gretldata.zoo <- as.zoo(gretldata)
 	TimeSeriesList.gretldata <- attributes(gretldata.zoo)$dimnames[[2]]
 
@@ -211,7 +221,6 @@ execute(cmd)
        execute(cmd)
   }
 }
-
 
 # sample data for testing
 #data("Anscombe",package="car") # for ols
@@ -235,22 +244,13 @@ This package comes with ABSOLUTELY NO WARRANTY; for details
 click on the menu item 'Hansel Analysis>About DeducerHansel>Warranty'.
 This is free software, and you are welcome to redistribute it under certain
 conditions covered by the GNU General Public License version 2 (GPLv2) license;
-for details click on the menu item 'Hansel Analysis>About DeducerHansel>License'.
+for details click on the menu item 'Hansel Analysis>About DeducerHansel>License'."
 
-Note: To make the Hansel Analysis menu item initially visible in JGR, 
-you may need to hover your mouse over the JGR menu items. In the base R console,
-under windows to get the Hansel Analysis menu you need to first choose 
-Hansel Analysis>Open Floating Menu, and in RStudio under windows the Hansel
-Analysis menu will come up automatically, although perhaps hidden behind the¨
-Rstudio console.
-
-Welcome to DeducerHansel!"
-
-writeLines(paste(.CopyRight1,.CopyRight2,sep=""))
+writeLines(paste(.CopyRight1,.CopyRight2,.startInstructions,sep=""))
 
 rm(.CopyRight1)
 rm(.CopyRight2)
-
+rm(.startInstructions)
 }
 
 

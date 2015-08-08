@@ -14,7 +14,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
  The current file most notably uses the code from SingletonAddRemoveButton.java in the Deducer package. 
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
  */
 
 package hansel;
@@ -98,7 +98,8 @@ public class KeepSingletonAddRemoveButton extends IconButton implements ActionLi
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if(cmd.equals(cmdText[0])){
-			Object[] objs=leftList.getSelectedValuesList().toArray();
+                      //Object[] objs=leftList.getSelectedValuesList().toArray();
+			Object[] objs=leftList.getSelectedValues();
 			if(objs.length>1){
 				leftList.setSelectedIndex(leftList.getSelectedIndex());
 			}else if(objs.length==1 && singList.getModel().getSize()==0){

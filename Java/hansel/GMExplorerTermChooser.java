@@ -15,7 +15,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
       GLMExplorerPlots.java and ModelBuilder.java, found in the Deducer package
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
  */
 
 package hansel;
@@ -421,7 +421,8 @@ public class GMExplorerTermChooser extends javax.swing.JDialog implements Action
 			this.dispose();
 		}else if(cmd=="OK"){
                        if (model.panelModel){
-                           Object[] newTerm = termsList2.getSelectedValuesList().toArray();
+                           //Object[] newTerm = termsList2.getSelectedValuesList().toArray();
+                           Object[] newTerm = termsList2.getSelectedValues();
                             if (newTerm==null)
                              {
                                     JOptionPane.showMessageDialog(null, "Please select at least one name, level, or category");
@@ -433,7 +434,8 @@ public class GMExplorerTermChooser extends javax.swing.JDialog implements Action
                             }
                        }
                        else {
-                              Object[] newTerm = termsList.getSelectedValuesList().toArray();
+                              //Object[] newTerm = termsList.getSelectedValuesList().toArray();
+                              Object[] newTerm = termsList.getSelectedValues();
                          if (newTerm==null || !(newTerm.length==1))
                             if (newTerm==null)
                              {
@@ -449,20 +451,6 @@ public class GMExplorerTermChooser extends javax.swing.JDialog implements Action
                        
                         updateModel();
 			this.dispose();
-		}else if(cmd=="Add"){
-			Object[] objs=terms.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)terms.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)effects.getModel()).addElement(objs[i]);
-			}
-		}else if(cmd=="Remove"){
-			Object[] objs=effects.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)effects.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)terms.getModel()).addElement(objs[i]);
-			}
 		}
 		
 	}

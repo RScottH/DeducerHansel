@@ -14,7 +14,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
 The current file most notably uses the code from  GLMExplorerPlots.java and CorDialog.java in the Deducer package.  
 
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
 
  */
 
@@ -894,8 +894,9 @@ public class GMExplorerOtherPlots extends javax.swing.JDialog implements ActionL
                                 (plotSelection.equals("Partial residual plots*"))||
                                 (plotSelection.equals("Scatter plots with response variable*"))||
                                 (plotSelection.equals("Scatter plots without response variable*")
-                                )){ 
-             	       Object[] plotTerms = termsList.getSelectedValuesList().toArray();
+                                )){
+                       //Object[] plotTerms = termsList.getSelectedValuesList().toArray();
+             	       Object[] plotTerms = termsList.getSelectedValues();
 		       if ((plotTerms.equals(null) || plotTerms.length<1)&&(
                                 
                                 (plotSelection.equals("Partial regression plots*"))||
@@ -955,20 +956,6 @@ public class GMExplorerOtherPlots extends javax.swing.JDialog implements ActionL
                         model.efeaeplots.moreDiagnosticPlots = plotSelection;
                         
 			this.dispose();
-		}else if(cmd=="Add"){
-			Object[] objs=terms.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)terms.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)effects.getModel()).addElement(objs[i]);
-			}
-		}else if(cmd=="Remove"){
-			Object[] objs=effects.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)effects.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)terms.getModel()).addElement(objs[i]);
-			}
 		}
 		
 	}

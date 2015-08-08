@@ -17,7 +17,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
   ExampleDialog.java (dated 2010-03-12), found in the DeducerPlugInExample package.
   
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
  */
 
 
@@ -63,6 +63,7 @@ import org.rosuda.deducer.models.RModel;
 import org.rosuda.deducer.widgets.ButtonGroupWidget;
 
 public class NMTimeSUnitRootTestOptions extends javax.swing.JDialog implements ActionListener{
+        public Font font14 = new Font("serif", Font.TRUETYPE_FONT, 14);
         public Font font12 = new Font("serif", Font.TRUETYPE_FONT, 12);
         public Font font11 = new Font("serif", Font.TRUETYPE_FONT, 11);
         public Font font10 = new Font("serif", Font.TRUETYPE_FONT, 10);
@@ -285,7 +286,7 @@ public class NMTimeSUnitRootTestOptions extends javax.swing.JDialog implements A
                                         getContentPane().add(spPolynDegree, new AnchorConstraint(400, 931, 805, 11, 
 						AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_NONE, 
 						AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
-                                        spPolynDegree.setPreferredSize(new java.awt.Dimension(280, 100));
+                                        spPolynDegree.setPreferredSize(new java.awt.Dimension(280, 125));
                                         spPolynDegree.setVisible(false);
                                 }  
 
@@ -328,7 +329,7 @@ public class NMTimeSUnitRootTestOptions extends javax.swing.JDialog implements A
 							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
 					adfMaxLag.setModel(maxLags);
                                         adfMaxLag.setFont(font12);
-					adfMaxLag.setPreferredSize(new java.awt.Dimension(60, 21));
+					adfMaxLag.setPreferredSize(new java.awt.Dimension(60, 26));
 					adfMaxLag.addActionListener(this);
                                         adfMaxLag.setVisible(false);
 				}
@@ -340,7 +341,7 @@ public class NMTimeSUnitRootTestOptions extends javax.swing.JDialog implements A
 							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
 					ersMaxLag.setModel(maxLags);
                                         ersMaxLag.setFont(font12);
-					ersMaxLag.setPreferredSize(new java.awt.Dimension(60, 21));
+					ersMaxLag.setPreferredSize(new java.awt.Dimension(60, 26));
 					ersMaxLag.addActionListener(this);
                                         ersMaxLag.setVisible(false);
 				}
@@ -351,7 +352,7 @@ public class NMTimeSUnitRootTestOptions extends javax.swing.JDialog implements A
 							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
 					kpssMaxLag.setModel(kpssMaxLags);
                                         kpssMaxLag.setFont(font12);
-					kpssMaxLag.setPreferredSize(new java.awt.Dimension(60, 21));
+					kpssMaxLag.setPreferredSize(new java.awt.Dimension(60, 26));
 					kpssMaxLag.addActionListener(this);
                                         kpssMaxLag.setVisible(false);
 				}        
@@ -362,7 +363,7 @@ public class NMTimeSUnitRootTestOptions extends javax.swing.JDialog implements A
 							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
 					ppLag.setModel(ppLags);
                                         ppLag.setFont(font12);
-					ppLag.setPreferredSize(new java.awt.Dimension(60, 21));
+					ppLag.setPreferredSize(new java.awt.Dimension(60, 26));
 					ppLag.addActionListener(this);
                                         ppLag.setVisible(false);
 				}    
@@ -385,7 +386,7 @@ public class NMTimeSUnitRootTestOptions extends javax.swing.JDialog implements A
 							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
 					zaMaxLag.setModel(zaMaxLags);
                                         zaMaxLag.setFont(font12);
-					zaMaxLag.setPreferredSize(new java.awt.Dimension(60, 21));
+					zaMaxLag.setPreferredSize(new java.awt.Dimension(60, 26));
 					zaMaxLag.addActionListener(this);
                                         zaMaxLag.setVisible(false);
 				}  
@@ -496,20 +497,6 @@ public class NMTimeSUnitRootTestOptions extends javax.swing.JDialog implements A
                         
 			updateModel();
 			this.dispose();
-		}else if(cmd=="Add"){
-			Object[] objs=terms.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)terms.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)effects.getModel()).addElement(objs[i]);
-			}
-		}else if(cmd=="Remove"){
-			Object[] objs=effects.getSelectedValuesList().toArray();
-			for(int i=0;i<objs.length;i++){
-				((DefaultListModel)effects.getModel()).removeElement(objs[i]);
-				if(objs[i]!=null)
-					((DefaultListModel)terms.getModel()).addElement(objs[i]);
-			}
 		}
 		
 	}

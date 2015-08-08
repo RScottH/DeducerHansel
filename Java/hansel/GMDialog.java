@@ -17,7 +17,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
   ExampleDialog.java, found in the DeducerPlugInExample package.
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
  */
 
 package hansel;
@@ -1440,12 +1440,12 @@ public class GMDialog  extends JDialog implements ActionListener {
                                 
 				{
 					newVariables = new JComboBox();
-					getContentPane().add(newVariables, new AnchorConstraint(689, 431, 824, 204,  
+					getContentPane().add(newVariables, new AnchorConstraint(689, 431, 824, 150,  
 							AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, 
 							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
 					newVariables.setModel(transforms);
                                         newVariables.setFont(font12);
-					newVariables.setPreferredSize(new java.awt.Dimension(60, 21));
+					newVariables.setPreferredSize(new java.awt.Dimension(72, 21));
 					newVariables.addActionListener(this);
 				}
                                 {
