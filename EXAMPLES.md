@@ -1,119 +1,84 @@
-# DeducerHansel
-Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac",
-Professor of Applied Econometrics and International Economics,
-Jönköping University,
-Jönköping International Business School,
-Jönköping, Sweden.
+# DeducerHansel Examples
+Below is a list of some standard datasets used for demonstrating how DeducerHansel works.
 
-DeducerHansel is an econometrics-focused GUI plug-in package for the R package Deducer. It adds a menu with additional statistical techniques that are popular in economics and various other fields. Unlike the base Deducer package, DeducerHansel can work with some time series dand spatial data that do not come up in data frame objects. DeducerHansel also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package.  
+Keep in mind that if a dataframe is added to your workspace, then it may not show up initially when you look at available dataframes in the variable selector.
+Next to the scroller on available dataframes is a reset button, which you can use to bring up the latest dataframes and clear variable selections.
 
-A copy of the _current development version_ 
-of the R-package `DeducerHansel` is contained in this repository. This package currently only has a development version.
 
-## Where DeducerHansel works
-DeducerHansel, like the Deducer package, is most at home using the JGR console, for which a JGR launcher (discussed later) is useful. If you are using a Windows operating system, DeducerHansel is also available in a "floating menu" through the standard RGui console available in base R and through RStudio, but this floating menu is not available in Mac OS-X. DeducerHansel has not been tested in Linux, but since Deducer works there, DeducerHansel is expected to do so also.
-
-## Installation of Java and R
-Java and R need to be installed on your computer before DeducerHansel can be used. 
-
-Java is often required for other software and you may very well already have Java installed on your computer; if not you can follow instructions at the link https://www.oracle.com/java/index.html to install Java. 
-
-Instructions for installing R are given at http://cran.r-project.org/. For a Windows-based system, if you do not have administrator status then installing R onto C:\Program Files\R-3.1.2 (typically the default; note R-3.1.2 is an example—version numbers do change) could create problems, which can be avoided by installing elsewhere, e.g. onto C:\CRAN R\R-3.1.2 instead. These problems can effect in particular the usability of the JGR launcher, discussed later, or even the installation of DeducerHansel altogether.
-
-## Installation of DeducerHansel
-
-The most convenient way to install the `DeducerhHansel` package through github is by using the package `devtools`,entering the following commands into R:
-
-First in R, if you have not already installed `devtools`, then enter the following R commands in your R console to do so:
+## For Ordinary least squares
+I have used the car package's Anscombe dataset frequently in developing in considering how OLS works in DeducerHansel. The following command can be used to download it.
 
 ```R
-install.packages('devtools')
+data('Anscombe',package='car')
 ```
 
-After `devtools` has loaded enter the following R commands:
+## For logit and probit
+I have not yet found a good dataset among those in the packages yet for considering binary logit and binary probit. To test these methods I used the Anscombe dataset, noted above with OLS, and split the income variable based on whether it is above the median or not, and used that as the response variable. 
+To split it I select highlight it in the variable selector, and in the scroller next to "New Variable" below the variable selector, I choose "split", which makes the split variable selectable.
+
+## For tobit models
+A classic dataset for testing logit is the Affairs dataset found in the AER package, but I don't think it is all that great for demonstrating logit. Instead I create an artificial dataset for the tobit testing based on the Wages1 dataset in the Ecdata package, by providing a lower limit of 10 for the wage variable. The redefined Wage1 variable can then be used as the response variable. The commands I give are 
 
 ```R
-require(devtools)
-install_github('RScottH/DeducerHansel')
+data('Wages1',package='Ecdat')
+Wages1$wage[Wages1$wage<10]=10
 ```
 
-## Using DeducerHansel without the JGR console in Windows
+## For time series models using data originally from data frames
+I have used the urca package's UKpppuip dataset considering how the time series methods work. In this case it is easiest to go to 
 
-In your R console load the DeducerHansel package.
+Hansel Analysis>Data Retrieval>Load sample dataset
 
-If you are using the RStudio console, the floating menu should come up automatically when DeducerHansel is loaded, but it may be hidden behind the RStudio console initially.
+and load it from that page.
 
-If you are using the standard RGui console go to the menu 'Hansel Analysis' and click on 'Open Floating Menu' to get options available in DeducerHansel.
+Many of the time series techniques are available without dating the observations. However more meaningful graphs and using lags and differences require some dating. To put on some dates, go to 
 
-## Using DeducerHansel with JGR console, without JGR launcher
+Hansel Analysis>Data Tools>data.frame -> time series mirror
 
-In your R console load the DeducerHansel package and enter the command 
+Here one can enter 1971:1 for the starting date and 4 for the frequency (as it is quarerly data). 
+
+## For time series models using data originally in other formats
+Here I typically download data from Yahoo! using 
+
+Hansel Analysis>Data Retrieval>Download data from Yahoo!
+
+and then choose [DIA] Dow Jones Industrial average using a "partial mirror". That results two objects being added to the workspace: DIA which is an xts object, and DIA__ which is a dataframe that contains just the names of the variables in DIA, so they can be used in the variable selector.
+
+## For panel models
+Here I typically use the plm package's Grunfeld dataset. The following command can be used to download it.
 
 ```R
-JGR()
+data('Grunfeld',package='plm')
 ```
 
-The JGR console will pop up, and you can load DeducerHansel again there. If you close RStudio at this point, JGR will go away, but that is not the case with the R base console.
+## For spatial cross-sectional models - no map
+Here the spdep package's oldcol dataset can be used, with the following command to download it 
 
-The nuisance of having to go through another console to get the JGR console everytime you want to use JGR is a nuisance which having the JGR launcher useful will avoid.
+```R
+data('oldcol',package='spdep')
+```
 
-##Getting the JGR launcher.
-In the next section there is indicated a way to start JGR without the JGR launcher. But that will be cumbersome to do every time you wish to work with JGR. Ideally you should have the JGR launcher. 
-
-Go to the web page for JGR ( http://www.rforge.net/JGR/ ) to get the JGR launcher, which is an executable file with an icon that can be placed on your desktop. In that web page the launcher is found in the “Download” section after the “what’s new section” [Don’t use the “Download/Files” link at the top left of the page, as the downloads seem to be more out-of-date there]. 
-(i) windows
-Get the latest 32-bit version for windows, which at the time of this document is called “jgr-1 62.exe” (this name may change with later JGR versions). Simply download the file and copy or drag it to your desktop.
-(ii) Mac
-Get the universal binary (JGR*.dmg) listed which is most appropriate for your system. 
-
-##Loading DeducerHansel in JGR
-
-The first time you open JGR, Deducer and DeducerHansel not be loaded (if you see “Analysis” in the top menu bar, Deducer is loaded). To load Deducer and DeducerHansel, click on Packages & Data> Package Manager and find these packages in the list of packages. On each click on the left box (to load) and on the right box (to automatically load every time JGR is opened) and click on Refresh and then close the Package Manager.
-
-## Information on Deducer
-Please check out ( http://www.Deducer.org  ) for more information on Deducer.
-
-## Bug reports 
-
-Users of package `DeducerHansel` are very welcome to report bugs at the github page for the package. To initiate a new bug report or feature request, click on *issue* in the menu found to the right.
-
-## License and warranty information
-The DeducerHansel package is free software; you can
-redistribute it and/or modify it under the terms of the GNU 
-General Public License version 2 (GPLv2), as published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details. A copy of the GPLv2 license is provided in the main DeducerHansel directory. If you have not received it, instructions for seeing it are provided 
-when DeducerHansel is loaded into R. Otherwise it is also
-available at http://www.gnu.org/licenses/gpl-2.0.html . Otherwise you can write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
+The data should be ready for spatial regressions after making the connection between COL.OLD and COL.nb in
+   Data Tools> Spatial File Associations.
+   (to see change, you will need to "Confirm changes to primary associations" a couple of times).   
 
 
-## Attribution
+## For spatial cross-sectional models - with map
+Here I have downloaded the sids.shp file (e.g from https://geodacenter.asu.edu/sdata) and used 
 
-The following packages provided some source code that was 
-used in the DeducerHansel package. All of these packages are covered by GPLv2. 
+Hansel Analysis>Data Retrieval>Open data 
 
-Java source code:
-Deducer (0.7-6 version, dated 2012-12-05),
-     by Ian Fellows
+to open it. 
 
-DeducerPlugInExample (0.2-0 version, dated 2012-03-16),
-     by Ian Fellows
 
-DeducerSpatial package (0.7 version, dated 2013-04-12),
-     by Ian Fellows and Alex Rickett with contributions 
-             from Neal Fultz.             
+## For spatial panel models
+Here the splm package's Produc and usaww datasets can be used together, with the following commands to download them 
 
-JGR package (1.7 -18 version, downloaded 2015-07-15),
-     by Markus Helbig, Simon Urbanek and Ian Fellows.
+```R
+data(Produc, package = 'Ecdat')
+data(usaww, package = 'splm')
+```
 
-R souce code:
-DeducerPlugInExample (0.2-0 version, dated 2012-03-16),
-      by Ian Fellows
+The data should be ready for spatial panel regressions after making the connection between Produc and usaww in
 
-RCmdr (1.6-6 version, dated 2013-03-15) 
-       by John Fox and Milan Bouchet-Valat, with
-       various contributors
-       (one line of R code, but an important one!)
+Data Tools> Spatial File Associations.
