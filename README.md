@@ -1,5 +1,5 @@
 # DeducerHansel
-DeducerHansel is an econometrics-focused GUI plug-in package for the R package Deducer. It adds a menu with additional statistical techniques that are popular in economics and various other fields. Unlike the base Deducer package, DeducerHansel can work with some time series dand spatial data that do not come up in data frame objects. DeducerHansel also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package.  
+DeducerHansel is an econometrics-focused GUI plug-in package for the R package Deducer. It adds a menu with additional statistical techniques that are popular in economics and various other fields. Unlike the base Deducer package, DeducerHansel can work with some time series and spatial data that do not come up in data frame objects. DeducerHansel also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package.  
 
 A copy of the _current development version_ 
 of the R-package `DeducerHansel` is contained in this repository. This package currently only has a development version.
@@ -16,9 +16,9 @@ Instructions for installing R are given at http://cran.r-project.org/. For a Win
 
 ## Installation of DeducerHansel
 
-The most convenient way to install the `DeducerhHansel` package through github is by using the package `devtools`,entering the following commands into R:
+The most convenient way to install the `DeducerHansel` package through github is by using the package `devtools`, entering the following commands into R:
 
-First in R, if you have not already installed `devtools`, then enter the following R commands in your R console to do so:
+If you have not already installed `devtools`, then enter the following R command in your R console to do so:
 
 ```R
 install.packages('devtools')
@@ -37,7 +37,7 @@ In your R console load the DeducerHansel package
 
 If you are using the RStudio console, the floating menu should come up automatically when DeducerHansel is loaded, but it may be hidden behind the RStudio console initially.
 
-If you are using the standard RGui console go to the menu 'Hansel Analysis' and click on 'Open Floating Menu' to get options available in DeducerHansel.
+If you are using the standard RGui console go to the menu 'Hansel' and click on 'Open Floating Menu' to get the floating menu.
 
 ## Using DeducerHansel with JGR console, without JGR launcher
 
@@ -52,17 +52,19 @@ The JGR console will pop up, and you can load DeducerHansel again there. If you 
 The nuisance of having to go through another console to get the JGR console everytime you want to use JGR is a nuisance which having the JGR launcher useful will avoid.
 
 ##Getting the JGR launcher.
-In the next section there is indicated a way to start JGR without the JGR launcher. But that will be cumbersome to do every time you wish to work with JGR. Ideally you should have the JGR launcher. 
+If you wish to work regularly with the JGR console, then ideally you should have the JGR launcher. 
 
 Go to the web page for JGR ( http://www.rforge.net/JGR/ ) to get the JGR launcher, which is an executable file with an icon that can be placed on your desktop. In that web page the launcher is found in the “Download” section after the “what’s new section” [Don’t use the “Download/Files” link at the top left of the page, as the downloads seem to be more out-of-date there]. 
-(i) windows
+
+(i) Windows
 Get the latest 32-bit version for windows, which at the time of this document is called “jgr-1 62.exe” (this name may change with later JGR versions). Simply download the file and copy or drag it to your desktop.
-(ii) Mac
+
+(ii) Mac OS-X
 Get the universal binary (JGR*.dmg) listed which is most appropriate for your system. 
 
 ##Loading DeducerHansel in JGR
 
-The first time you open JGR, Deducer and DeducerHansel not be loaded (if you see “Analysis” in the top menu bar, Deducer is loaded). To load Deducer and DeducerHansel, click on Packages & Data> Package Manager and find these packages in the list of packages. On each click on the left box (to load) and on the right box (to automatically load every time JGR is opened) and click on Refresh and then close the Package Manager.
+The first time you open JGR, Deducer and DeducerHansel will not be loaded (if you see “Analysis” in the top menu bar, Deducer is loaded). To load Deducer and DeducerHansel, click on Packages & Data> Package Manager and find these packages in the list of packages. On each click on the left box (to load) and on the right box (to automatically load every time JGR is opened) and click on Refresh and then close the Package Manager.
 
 ##The Reset button - An important tip for using dataframes
 

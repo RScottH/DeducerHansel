@@ -1,8 +1,8 @@
 # DeducerHansel DEMONSTRATIONS
 Below is a list of some standard datasets used for demonstrating how DeducerHansel works.
 
-Keep in mind that if a dataframe is added to your workspace, then it may not show up initially when you look at available dataframes in the variable selector.
-Next to the scroller on available dataframes is a reset button, which you can use to bring up the latest dataframes and clear variable selections.
+Keep in mind that if a data frame is added to your workspace, then it may not show up initially when you look at available data frames in the variable selector.
+Next to the scroller on available data frames is a reset button, which you can use to bring up the latest data frames and clear variable selections.
 
 
 ## For Ordinary least squares
@@ -13,14 +13,14 @@ data('Anscombe',package='car')
 ```
 
 ## For logit and probit
-I have not yet found a good dataset among those in the packages yet for considering binary logit and binary probit. To test these methods I used the Anscombe dataset, noted above with OLS, and split the income variable based on whether it is above the median or not, and used that as the response variable. 
-To split it I select highlight it in the variable selector, and in the scroller next to "New Variable" below the variable selector, I choose "split", which makes the split variable selectable.
+I have not yet found a good dataset among those in the installed packages yet for considering binary logit and binary probit. To test these methods I used the Anscombe dataset, noted above with OLS, and split the income variable based on whether it is above the median or not, and used that as the response variable. 
+To split it I select highlight it in the variable selector, and in the scroller next to "New Variable" below the variable selector, choose "split", which makes the split variable selectable.
 
 ## For tobit models
-A classic dataset for testing logit is the Affairs dataset found in the AER package, but I don't think it is all that great for demonstrating logit. Instead I create an artificial dataset for the tobit testing based on the Wages1 dataset in the Ecdata package, by providing a lower limit of 10 for the wage variable. The redefined Wage1 variable can then be used as the response variable. If the Ecdat package is not yet installed, the first command to give is
+A classic dataset for testing logit is the Affairs dataset found in the AER package, but I don't think it is all that great for demonstrating logit. Instead I create an artificial dataset for the tobit testing based on the Wages1 dataset in the Ecdata package, by providing a lower limit of 10 for the wage variable. The redefined wage variable can then be used as the response variable. If the Ecdat package is not yet installed, the first command to give is
 
 ```R
-Install.packages('Ecdat')
+install.packages('Ecdat')
 ```  
 
 Subsequently to get the data the following commands are entered.
@@ -31,7 +31,7 @@ Wages1$wage[Wages1$wage<10]=10
 ```
 
 ## For time series models using data originally from data frames
-I have used the urca package's UKpppuip dataset considering how the time series methods work. In this case it is easiest to go to 
+I have used the urca package's UKpppuip dataset to consider how the time series methods work in DeducerHansel. In this case it is easiest to go to 
 
 Hansel Analysis>Data Retrieval>Load sample dataset
 
@@ -48,7 +48,7 @@ Here I typically download data from Yahoo! using
 
 Hansel Analysis>Data Retrieval>Download data from Yahoo!
 
-and then choose [DIA] Dow Jones Industrial average using a "partial mirror". That results two objects being added to the workspace: DIA which is an xts object, and DIA__ which is a dataframe that contains just the names of the variables in DIA, so they can be used in the variable selector.
+and then choose [DIA] Dow Jones Industrial average using a "partial mirror". That results two objects being added to the workspace: DIA which is an xts object, and DIA__ which is a data frame that contains just the names of the variables in DIA, so they can be used in the variable selector.
 
 ## For panel models
 Here I typically use the plm package's Grunfeld dataset. The following command can be used to download it.
@@ -65,12 +65,11 @@ data('oldcol',package='spdep')
 ```
 
 The data should be ready for spatial regressions after making the connection between COL.OLD and COL.nb in
-   Data Tools> Spatial File Associations.
-   (to see change, you will need to "Confirm changes to primary associations" a couple of times).   
+   Data Tools> Spatial File Associations (to see the change, you will need to "Confirm changes to primary associations" a couple of times).   
 
 
 ## For spatial cross-sectional models - with map
-For this demonstration I download onto my local disk the data files sids.dbf, sids.shp, sids.shx from the source material for the maptools package ( https://cran.r-project.org/web/packages/maptools/index.html ), found under maptools\inst\shapes\. Subsequently I use
+For this demonstration I download onto my local disk the data files sids.dbf, sids.shp, sids.shx from the [source material for the maptools package ( https://cran.r-project.org/web/packages/maptools/index.html ), found under maptools\inst\shapes\. Subsequently I use
 
 Hansel Analysis>Data Retrieval>Open data 
 
@@ -82,7 +81,7 @@ Here Ecdat package's Produc dataset and the splm package's usaww dataset can be 
 If the Ecdat package is not yet installed, the first command to give is
 
 ```R
-Install.packages('Ecdat')
+install.packages('Ecdat')
 ```  
 
 Subsequently to get the data the following commands are entered.
@@ -94,4 +93,4 @@ data(usaww, package = 'splm')
 
 The data should be ready for spatial panel regressions after making the connection between Produc and usaww in
 
-Data Tools> Spatial File Associations.
+Data Tools> Spatial File Associations (to see the change, you will need to "Confirm changes to primary associations" a couple of times). 
