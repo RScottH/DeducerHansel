@@ -69,7 +69,7 @@ The data should be ready for spatial regressions after making the connection bet
 
 
 ## For spatial cross-sectional models - with map
-For this demonstration I download onto my local disk the data files sids.dbf, sids.shp, sids.shx from the [source material for the maptools package ( https://cran.r-project.org/web/packages/maptools/index.html ), found under maptools\inst\shapes\. Subsequently I use
+For this demonstration I download onto my local disk the data files sids.dbf, sids.shp, sids.shx from the [source material for the maptools package]( https://cran.r-project.org/web/packages/maptools/index.html ), found under maptools\inst\shapes\. Subsequently I use
 
 Hansel Analysis>Data Retrieval>Open data 
 
