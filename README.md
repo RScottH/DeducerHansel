@@ -1,10 +1,4 @@
 # DeducerHansel
-Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac",
-Professor of Applied Econometrics and International Economics,
-Jönköping University,
-Jönköping International Business School,
-Jönköping, Sweden.
-
 DeducerHansel is an econometrics-focused GUI plug-in package for the R package Deducer. It adds a menu with additional statistical techniques that are popular in economics and various other fields. Unlike the base Deducer package, DeducerHansel can work with some time series dand spatial data that do not come up in data frame objects. DeducerHansel also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package.  
 
 A copy of the _current development version_ 
@@ -39,7 +33,7 @@ install_github('RScottH/DeducerHansel')
 
 ## Using DeducerHansel without the JGR console in Windows
 
-In your R console load the DeducerHansel package.
+In your R console load the DeducerHansel package
 
 If you are using the RStudio console, the floating menu should come up automatically when DeducerHansel is loaded, but it may be hidden behind the RStudio console initially.
 
@@ -70,6 +64,13 @@ Get the universal binary (JGR*.dmg) listed which is most appropriate for your sy
 
 The first time you open JGR, Deducer and DeducerHansel not be loaded (if you see “Analysis” in the top menu bar, Deducer is loaded). To load Deducer and DeducerHansel, click on Packages & Data> Package Manager and find these packages in the list of packages. On each click on the left box (to load) and on the right box (to automatically load every time JGR is opened) and click on Refresh and then close the Package Manager.
 
+##The Reset button - An important tip for using dataframes
+
+If a dataframe is added to your workspace, then it may not show up initially when you look at available dataframes in the variable selector. Next to the scroller on available dataframes is a reset button, which you can double-click to bring up the latest dataframes and clear variable selections. 
+
+This is in contrast to what occurs in the base Deducer package, in which avaialable dataframes for the variable selector are updated automatically. That is not done in DeducerHansel so that choices of variables by the user would be remembered more frequently--so as a user you can, for example, change from a binary logit specification to a binary probit one without re-selecting your variables. But it is at the cost of you needing to manually reset the available dataframes when you adds one to the workspace (one exception-if the variable selector has not been previously opened then it will look for available dataframes automatically).
+
+
 ## Information on Deducer
 Please check out ( http://www.Deducer.org  ) for more information on Deducer.
 
@@ -77,7 +78,16 @@ Please check out ( http://www.Deducer.org  ) for more information on Deducer.
 
 Users of package `DeducerHansel` are very welcome to report bugs at the github page for the package. To initiate a new bug report or feature request, click on *issue* in the menu found to the right.
 
-## License and warranty information
+## Copyright, license and warranty information
+
+The DeducerHansel package has the following copyright:
+
+Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac",
+Professor of Applied Econometrics and International Economics,
+Jönköping University,
+Jönköping International Business School,
+Jönköping, Sweden.
+
 The DeducerHansel package is free software; you can
 redistribute it and/or modify it under the terms of the GNU 
 General Public License version 2 (GPLv2), as published by the Free Software Foundation.

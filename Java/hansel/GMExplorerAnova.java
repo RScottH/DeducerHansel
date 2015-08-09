@@ -14,7 +14,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
  The current file notably uses the code from GLMExplorerOptions.java in the Deducer package.
  
 The current file made adjustments to that earlier java code on 2013-07-04 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-09.
  */
 
 
@@ -85,24 +85,24 @@ public class GMExplorerAnova extends javax.swing.JDialog implements ActionListen
                                         {
 						typeI = new JRadioButton();
 						getContentPane().add(typeI);
-						typeI.setText("I");
+						typeI.setText("I  ");
                                                 typeI.setFont(font12);
-						typeI.setBounds(165, 29, 34, 19);
+						typeI.setBounds(145, 29, 52, 19);
 					}
                                         
 					{
 						typeII = new JRadioButton();
 						getContentPane().add(typeII);
-						typeII.setText("II");
+						typeII.setText("II ");
                                                 typeII.setFont(font12);
-						typeII.setBounds(205, 29, 40, 19);
+						typeII.setBounds(195, 29, 51, 19);
 					}
 					{
 						typeIII = new JRadioButton();
 						getContentPane().add(typeIII);
 						typeIII.setText("III");
                                                 typeIII.setFont(font12);
-						typeIII.setBounds(260, 29, 51, 19);
+						typeIII.setBounds(250, 29, 51, 19);
 					}
 
 
@@ -111,7 +111,7 @@ public class GMExplorerAnova extends javax.swing.JDialog implements ActionListen
 				{
 					okayCancel = new OkayCancelPanel(false,false,this);
 					getContentPane().add(okayCancel);
-					okayCancel.setBounds(88, 150, 189, 31);
+					okayCancel.setBounds(88, 80, 189, 31);
                                         okayCancel.setFont(font12);
 				}
 			}
@@ -122,7 +122,7 @@ public class GMExplorerAnova extends javax.swing.JDialog implements ActionListen
 			b.add(typeIII);
 			this.setTitle(dialogTitle+" Table");
                         this.setFont(font12);
-			this.setSize(320, 240);
+			this.setSize(320, 180);
 		} catch (Exception e) {
 			new ErrorMsg(e);
 		}
