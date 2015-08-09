@@ -10,9 +10,9 @@ DeducerHansel, like the Deducer package, is most at home using the JGR console, 
 ## Installation of Java and R
 Java and R need to be installed on your computer before DeducerHansel can be used. 
 
-Java is often required for other software and you may very well already have Java installed on your computer; if not you can follow instructions at the link https://www.oracle.com/java/index.html to install Java. 
+Java is often required for other software and you may very well already have Java installed on your computer; if not you can follow instructions at the [Java web page] (https://www.oracle.com/java/index.html) to install Java. 
 
-Instructions for installing R are given at http://cran.r-project.org/. For a Windows-based system, if you do not have administrator status then installing R onto C:\Program Files\R-3.1.2 (typically the default; note R-3.1.2 is an example—version numbers do change) could create problems, which can be avoided by installing elsewhere, e.g. onto C:\CRAN R\R-3.1.2 instead. These problems can effect in particular the usability of the JGR launcher, discussed later, or even the installation of DeducerHansel altogether.
+Instructions for installing R are given at the [CRAN web page](http://cran.r-project.org/). For a Windows-based system, if you do not have administrator status then installing R onto C:\Program Files\R-3.1.2 (typically the default; note R-3.1.2 is an example—version numbers do change) could create problems, which can be avoided by installing elsewhere, e.g. onto C:\CRAN R\R-3.1.2 instead. These problems can effect in particular the usability of the JGR launcher, discussed later, or even the installation of DeducerHansel altogether.
 
 ## Installation of DeducerHansel
 
@@ -54,7 +54,7 @@ The nuisance of having to go through another console to get the JGR console ever
 ##Getting the JGR launcher.
 If you wish to work regularly with the JGR console, then ideally you should have the JGR launcher. 
 
-Go to the web page for JGR ( http://www.rforge.net/JGR/ ) to get the JGR launcher, which is an executable file with an icon that can be placed on your desktop. In that web page the launcher is found in the “Download” section after the “what’s new section” [Don’t use the “Download/Files” link at the top left of the page, as the downloads seem to be more out-of-date there]. 
+Go to the [JGR web page]( http://www.rforge.net/JGR/ ) to get the JGR launcher, which is an executable file with an icon that can be placed on your desktop. In that web page the launcher is found in the “Download” section after the “what’s new section” [Don’t use the “Download/Files” link at the top left of the page, as the downloads seem to be more out-of-date there]. 
 
 (i) Windows
 Get the latest 32-bit version for windows, which at the time of this document is called “jgr-1 62.exe” (this name may change with later JGR versions). Simply download the file and copy or drag it to your desktop.
@@ -74,7 +74,7 @@ This is in contrast to what occurs in the base Deducer package, in which avaiala
 
 
 ## Information on Deducer
-Please check out ( http://www.Deducer.org  ) for more information on Deducer.
+Please check out the [Deducer web page]( http://www.Deducer.org  ) for more information on Deducer.
 
 ## Bug reports 
 
@@ -99,7 +99,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details. A copy of the GPLv2 license is provided in the main DeducerHansel directory. If you have not received it, instructions for seeing it are provided 
 when DeducerHansel is loaded into R. Otherwise it is also
-available at http://www.gnu.org/licenses/gpl-2.0.html . Otherwise you can write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
+available at http://www.gnu.org/licenses/gpl-2.0.html, or you can write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
 
 
 ## Attribution
