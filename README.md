@@ -104,7 +104,7 @@ available at http://www.gnu.org/licenses/gpl-2.0.html, or you can write to the F
 ## Research Assistance
 I thank Dawoud Asalya and Saher Malik in their testing of earlier versions of this package.
 
-## Attribution for ealier source code
+## Attribution for earlier source code
 
 The following packages provided some source code that was 
 used in the DeducerHansel package. All of these packages are covered by GPLv2. 
