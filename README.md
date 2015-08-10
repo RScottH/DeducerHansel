@@ -101,8 +101,10 @@ GNU General Public License for more details. A copy of the GPLv2 license is prov
 when DeducerHansel is loaded into R. Otherwise it is also
 available at http://www.gnu.org/licenses/gpl-2.0.html, or you can write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
 
+## Research Assistance
+I thank Dawoud Asalya and Saher Malik in their testing of earlier versions of this package.
 
-## Attribution
+## Attribution for ealier source code
 
 The following packages provided some source code that was 
 used in the DeducerHansel package. All of these packages are covered by GPLv2. 
