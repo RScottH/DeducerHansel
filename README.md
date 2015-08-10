@@ -24,7 +24,7 @@ If you have not already installed `devtools`, then enter the following R command
 install.packages('devtools')
 ```
 
-After `devtools` has loaded enter the following R commands:
+After `devtools` has been installed enter the following R commands:
 
 ```R
 require(devtools)
