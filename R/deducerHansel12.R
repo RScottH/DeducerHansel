@@ -101,6 +101,10 @@ if("hexView" %in% rownames(installed.packages()) == FALSE)
 
 #For reading gretl files-note that devtools is assumed installed
 #and loaded, as should be when installing the development version #of DeducerHansel from GitHub.
+
+if("XML" %in% rownames(installed.packages()) == FALSE)
+{install.packages(c("XML"))}
+
 if("gretlReadWrite" %in% rownames(installed.packages()) == FALSE)
 { require(devtools);install_github("dickoa/gretlReadWrite")}
 
