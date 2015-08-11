@@ -102,7 +102,7 @@ if("hexView" %in% rownames(installed.packages()) == FALSE)
 #For reading gretl files-note that devtools is assumed installed
 #and loaded, as should be when installing the development version #of DeducerHansel from GitHub.
 if("gretlReadWrite" %in% rownames(installed.packages()) == FALSE)
-{ require(devtools);install_github("gretlReadWrite")}
+{ require(devtools);install_github("dickoa/gretlReadWrite")}
 
 #For spatial methods
 if("rgdal" %in% rownames(installed.packages()) == FALSE)
