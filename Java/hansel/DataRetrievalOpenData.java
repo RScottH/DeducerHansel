@@ -25,7 +25,7 @@ Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1
  The code in the files of those packages are covered by the GPL2 licenses for those packages.
  
 The current file made adjustments to that earlier java code on 2014-05-01 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-11.
  */
 
 package hansel;
@@ -137,6 +137,8 @@ public class DataRetrievalOpenData extends FileSelector{
                         this.getJFileChooser().addChoosableFileFilter(new FileNameExtensionFilter("S data dump (*.s3)", "s3"));
                         this.getJFileChooser().addChoosableFileFilter(new FileNameExtensionFilter("Excel (*.xls *.xlsx)", "xls","xlsx"));
                         this.getJFileChooser().addChoosableFileFilter(new FileNameExtensionFilter("Shape file (*.shp *.dbf *.prj *.sbn *.sbx)", "shp","dpf","prj","sbn","sbx"));
+                        this.getJFileChooser().addChoosableFileFilter(new FileNameExtensionFilter("EViews file (*.wf1)", "wf1"));
+                        this.getJFileChooser().addChoosableFileFilter(new FileNameExtensionFilter("gretl file (*.gdt)", "gdt"));
 
 		} //TODO handle the non-swing case
 
@@ -226,12 +228,40 @@ public class DataRetrievalOpenData extends FileSelector{
                         ".hansel.working.env$SPDrefs$"+rName+"__$listwFile1=\"nb2listw(poly2nb("+rName+"),style=\\\"W\\\")\"\n"+
                         "} else .hansel.working.env$SPDrefs <- list("+
                          rName +"__=list(nbFile1= \"poly2nb("+rName+")\",listwFile1=\"nb2listw(poly2nb("+rName+"),style=\\\"W\\\")\"))";
+               } else if(fileName.toLowerCase().endsWith(".wf1")){
+                   command +="library(hexView)\n";
+                   command += rName + " <- readEViews(\""+Deducer.addSlashes(path)+ fileName+"\")";
+               } else if(fileName.toLowerCase().endsWith(".gdt")){ 
+                  //  command +="require('devtools')\n";
+                  //  command +="if('gretlReadWrite' %in% rownames(installed.packages()) == FALSE)\n" +
+                  //                "{install_github('dickoa/gretlReadWrite')}\n";
+                    command +="library(gretlReadWrite)\n";
+                   command += rName + " <- read.gdt(\""+Deducer.addSlashes(path)+ fileName+"\")";
+                   
+                    command += 
+                           "\nif (class("+rName+")[1]=='mts'){"+ 
+                                    "\n library(zoo)"+
+                                    "\n if (is.null(colnames("+rName+") )) {"+
+                                      "colnames("+rName+") <- \""+rName+"\""+
+                                  "\n .hansel.temp.dimnamesToUse <-colnames("+rName+")"+
+                                  "\n "+rName+"__<- data.frame(rbind(.hansel.temp.dimnamesToUse))"+
+                                  "\n dimnames("+rName+"__)[[2]] <-   .hansel.temp.dimnamesToUse"+
+                                  "\n "+rName+"<-zoo("+rName+")"+
+                                  "}else {"+
+                             "\n "+rName+"<-zoo("+rName+")"+
+                             "\n .hansel.temp.dimnamesToUse <-colnames("+rName+")"+
+                             "\n "+rName+"__<- data.frame(rbind(.hansel.temp.dimnamesToUse))"+
+                             "\n dimnames("+rName+"__)[[2]] <-   .hansel.temp.dimnamesToUse}"+
+                             "\n rm(.hansel.temp.dimnamesToUse)\n"+
+                            "}";
+
                } else {
                    int opt = JOptionPane.showConfirmDialog(this, "Unknown File Type.\nWould you like to try to open it as a text data file?");
                         if (opt == JOptionPane.OK_OPTION)
                                 command +=  "load(\""+Deducer.addSlashes(path)+ fileName+"\"))";
 			}
 		Deducer.execute(command);
+                
 		return true;
 	}
         

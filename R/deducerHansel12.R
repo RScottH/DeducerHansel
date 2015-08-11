@@ -27,7 +27,7 @@
 # by Ian Fellows  (code that also falls under the GPL-2 license)
 # and a line of code from commander.R (dated 2013-03-14) in the
 # Rcmdr package (dated 2013-03-14,by John Fox, license: GPL (>=2)),
-# with modifications made on 2015-03-10.
+# with modifications made on 2013-04-11, 2015-03-10  2015-03-10,  2015-08-11.
 #
 ##############
 
@@ -94,6 +94,15 @@ if("mFilter" %in% rownames(installed.packages()) == FALSE)
 
 if("XLConnect" %in% rownames(installed.packages()) == FALSE)
 {install.packages(c("XLConnect"))}
+
+#For reading Eviews files
+if("hexView" %in% rownames(installed.packages()) == FALSE)
+{install.packages("hexView")}
+
+#For reading gretl files-note that devtools is assumed installed
+#and loaded, as should be when installing the development version #of DeducerHansel from GitHub.
+if("gretlReadWrite" %in% rownames(installed.packages()) == FALSE)
+{install_github("gretlReadWrite")}
 
 #For spatial methods
 if("rgdal" %in% rownames(installed.packages()) == FALSE)
