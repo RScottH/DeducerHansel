@@ -1,7 +1,8 @@
 # DeducerHansel
+
 DeducerHansel is an econometrics-focused GUI plug-in package for the Deducer R-package. It adds a Hansel Analysis menu with additional statistical techniques that are popular in economics and various other fields. Unlike what's available in the base Deducer package, the Hansel Analysis menu can work with some time series and spatial data that do not come up in data frame objects. Working through the Hansel Analysis menu also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package. 
 
-The Hansel Analysis menu provides access to R methods in a user-friendly way, in a way similar to [gretl] (http://gretl.sourceforge.net/), another econometrics-based free open-source software project (thus the name "Hansel" if you recognize the German fable). But unlike gretl, Hansel Analysis is built within the far more massive universe of R.  
+The Hansel Analysis menu provides access to R methods in a user-friendly way, in a way similar to [gretl] (http://gretl.sourceforge.net/), another econometrics-based free open-source software project (thus the name "Hansel" if you recognize the German fable; it also stands for **Ha**cker's **N**ew **S**election of *E**conometrics **L*ibraries, where "Hacker" refers to the author's surname). But unlike gretl, Hansel Analysis is built within the far more massive universe of R.  
 
 
 For a **list of features** please see the [associated web page for this repository](http://rscotth.github.io/DeducerHansel/).
