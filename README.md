@@ -1,5 +1,7 @@
 # DeducerHansel
-DeducerHansel is an econometrics-focused GUI plug-in package for the R package Deducer. It adds a menu with additional statistical techniques that are popular in economics and various other fields. Unlike the base Deducer package, DeducerHansel can work with some time series and spatial data that do not come up in data frame objects. DeducerHansel also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package.  
+DeducerHansel is an econometrics-focused GUI plug-in package for the R-package Deducer. It adds a menu with additional statistical techniques that are popular in economics and various other fields. Unlike the base Deducer package, DeducerHansel can work with some time series and spatial data that do not come up in data frame objects. DeducerHansel also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package.  
+
+For a **list of features** please see the [associated web page for this repository](http://rscotth.github.io/DeducerHansel/).
 
 A copy of the _current development version_ 
 of the R-package `DeducerHansel` is contained in this repository. This package currently only has a development version.
@@ -23,6 +25,7 @@ If you have not already installed `devtools`, then enter the following R command
 ```R
 install.packages('devtools')
 ```
+For some parts of this installation, please be patient; notably the installation of the magrittr package, as part of this installation, can take a while. 
 
 After `devtools` has been installed enter the following R commands:
 
@@ -30,6 +33,8 @@ After `devtools` has been installed enter the following R commands:
 require(devtools)
 install_github('RScottH/DeducerHansel')
 ```
+
+Don't worry if there is a warning obout Rtools being required to build R packages. For some parts of this installation, please be patient; notably the installation of the zoo package, as part of this installation, can take a while. 
 
 ## Using DeducerHansel without the JGR console in Windows
 
@@ -57,7 +62,7 @@ If you wish to work regularly with the JGR console, then ideally you should have
 Go to the [JGR web page]( http://www.rforge.net/JGR/ ) to get the JGR launcher, which is an executable file with an icon that can be placed on your desktop. In that web page the launcher is found in the “Download” section after the “what’s new section” [Don’t use the “Download/Files” link at the top left of the page, as the downloads seem to be more out-of-date there]. 
 
 (i) Windows
-Get the latest 32-bit version for windows, which at the time of this document is called “jgr-1 62.exe” (this name may change with later JGR versions). Simply download the file and copy or drag it to your desktop.
+Get the latest 32-bit version for windows, which at the time of this document is called “jgr-1 62.exe” (this name may change with later JGR versions). Simply download the file and copy or drag it to your desktop and open it (you may need to run it as un adminstrator). **Note: I have had mixed success in making this work on Windows, particularly on my own school's computers. My best guess now is that it hangs on some security protection. If you can't make it work, don't despair--there is still the floating-menu version available off of the RGui console or Rstudio.** 
 
 (ii) Mac OS-X
 Get the universal binary (JGR*.dmg) listed which is most appropriate for your system. 
@@ -101,8 +106,10 @@ GNU General Public License for more details. A copy of the GPLv2 license is prov
 when DeducerHansel is loaded into R. Otherwise it is also
 available at http://www.gnu.org/licenses/gpl-2.0.html, or you can write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
 
-## Research assistance
-I thank Dawoud Asalya and Saher Malik in their testing of earlier versions of this package.
+## Contributors
+I thank Abdulnasser Hatemi-J for his ideas early in the development of this package.
+
+I thank Peter Karlsson, Dawoud Asalya, and Saher Malik in their testing of earlier versions of this package.
 
 ## Attribution for earlier source code
 
