@@ -34,7 +34,7 @@ require(devtools)
 install_github('RScottH/DeducerHansel')
 ```
 
-Don't worry if there is a warning obout Rtools being required to build R packages. For some parts of this installation, please be patient; notably the installation of the zoo package, as part of this installation, can take a while. 
+Don't worry if there is a warning about Rtools being required to build R packages. For some parts of this installation also, please be patient; notably the installation of the zoo package, as part of this installation, can take a while. 
 
 ## Using DeducerHansel without the JGR console in Windows
 
