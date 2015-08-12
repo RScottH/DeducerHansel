@@ -49,13 +49,20 @@ null hypothesis, e.g "b(2) = 0".</li>
 <li>Data retrieval from net sources (Oanda, St Louis FRED, and Yahoo!) is available (albeit getting data from St Louis FRED is currently not working due to changes in the web address for the data; the maintainer of getSymbols command is working on that).</li>
 </ol>
 
+<p>To see some <strong>screen shots</strong> you can go to the <a href="http://hasc57.wix.com/deducerhansel">wix.com website for DeducerHansel</a>.</p>
+
 <h2>
 <a id="pre-installation-requirements" class="anchor" href="#pre-installation-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre-Installation requirements</h2>
 
 <p>DeducerHansel has been succesfully tested in Windows and Mac OS-X environments. It may very well work fine in Linux also. <br>
-Like the base Deducer package, DeducerHansel needs Java and R to run. The <a href="http://www.deducer.org/">Deducer web page</a> has a lot of good information on installing R and Deducer.
-Deducer and DeducerHansel are most at "home" with the JGR console, for which a JGR launcher is convenient to have. 
-More information about these pre-installation issues can be found in <a href="https://github.com/RScottH/DeducerHansel/blob/master/README.md">README.md document</a> at the GitHub repository site for DeducerHansel.</p>
+<br>
+Like the base Deducer package, DeducerHansel needs Java and R to run. More information about these installation issues can be found in <a href="https://github.com/RScottH/DeducerHansel/blob/master/README.md">README.md document</a> at the GitHub repository site for DeducerHansel.</p>
+
+<p>The installation instructions in the next section should be sufficient to install the DeducerHansel package along with the Deducer package it builds upon and the JGR package for which it may be useful, or even necessary, to use.</p>
+
+<p>Deducer and DeducerHansel are most at "home" with the JGR console, for which a JGR launcher is convenient to have. It can sometimes be tricky getting the JGR launcher working in Windows, but in that environment one can still easily use DeducerHansel through a "floating window", available in the standard RGui console or RStudio. </p>
+
+<p>The <a href="https://github.com/RScottH/DeducerHansel/blob/master/README.md">README.md document</a> at the GitHub repository site for DeducerHansel includes information on getting the JGR launcher. </p>
 
 <h2>
 <a id="installation-of-deducerhansel" class="anchor" href="#installation-of-deducerhansel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation of DeducerHansel</h2>
@@ -66,10 +73,14 @@ More information about these pre-installation issues can be found in <a href="ht
 
 <div class="highlight highlight-R"><pre>install.packages(<span class="pl-s"><span class="pl-pds">'</span>devtools<span class="pl-pds">'</span></span>)</pre></div>
 
+<p>For some parts of this installation, please be patient; notably the installation of the magrittr package, as part of this installation, can take a while. </p>
+
 <p>After <code>devtools</code> has been installed enter the following R commands:</p>
 
 <div class="highlight highlight-R"><pre>require(<span class="pl-smi">devtools</span>)
 install_github(<span class="pl-s"><span class="pl-pds">'</span>RScottH/DeducerHansel<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>Don't worry if there is a warning about Rtools being required to build R packages. For some parts of this installation also, please be patient; notably the installation of the zoo package, as part of this installation, can take a while. </p>
 
 <h2>
 <a id="using-deducerhansel" class="anchor" href="#using-deducerhansel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using DeducerHansel</h2>
