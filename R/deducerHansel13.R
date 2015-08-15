@@ -99,14 +99,9 @@ if("XLConnect" %in% rownames(installed.packages()) == FALSE)
 if("hexView" %in% rownames(installed.packages()) == FALSE)
 {install.packages("hexView")}
 
-#For reading gretl files-note that devtools is assumed installed
-#and loaded, as should be when installing the development version #of DeducerHansel from GitHub.
-
+#For use in gretlReadWrite, the install of which is in the .onLoad function below.
 if("XML" %in% rownames(installed.packages()) == FALSE)
 {install.packages(c("XML"))}
-
-if("gretlReadWrite" %in% rownames(installed.packages()) == FALSE)
-{ require(devtools);install_github("dickoa/gretlReadWrite")}
 
 #For spatial methods
 if("rgdal" %in% rownames(installed.packages()) == FALSE)
@@ -125,6 +120,8 @@ if("splm" %in% rownames(installed.packages()) == FALSE)
 .onLoad <- function(libname, pkgname) { 
 	
 	.jpackage(pkgname,lib.loc=libname)
+
+
 	  
 
 #Note: next 10 lines added to make sure the program runs on Mac
@@ -139,6 +136,15 @@ if("splm" %in% rownames(installed.packages()) == FALSE)
 	.jpackage("Deducer")
 	.jpackage("Hansel")
 ###
+
+
+#For reading gretl files-not included with the rest of the installs since loading of devtools 
+# needed.
+
+        if("gretlReadWrite" %in% rownames(installed.packages()) == FALSE)
+        {require(devtools);install_github("dickoa/gretlReadWrite")}
+
+
 
 Deducer::deducer.addMenu("Hansel")
 Deducer::deducer.addMenuItem("Open floating menu call",,
