@@ -83,14 +83,12 @@ Like the base Deducer package, DeducerHansel needs Java and R to run. More infor
 
 <div class="highlight highlight-R"><pre>chooseCRANmirror()</pre></div>
 
-<p>For some parts of this installation, please be patient; notably the installation of the magrittr package, as part of this installation, can take a while. </p>
-
-<p>After <code>devtools</code> has been installed enter the following R commands:</p>
+<p>Given <code>devtools</code> has been installed and a CRAN Mirror site has been chosen, then all that is left is to enter the following R commands:</p>
 
 <div class="highlight highlight-R"><pre>require(<span class="pl-smi">devtools</span>)
 install_github(<span class="pl-s"><span class="pl-pds">'</span>RScottH/DeducerHansel<span class="pl-pds">'</span></span>)</pre></div>
 
-<p>Don't worry if there is a warning about Rtools being required to build R packages. For some parts of this installation also, please be patient; notably the installation of the zoo package, as part of this installation, can take a while. </p>
+<p>Don't worry if there is a warning about Rtools being required to build R packages. For some parts of this installation also, please be patient; notably the installation of the zoo package, as part of this installation, can take a while. During the installation on OS-X you may get a message that "the 'make' command requires the command line developer tools" and get prompted on whether you would like to install the tools now. They are not necessary, so you can respond "Not Now" to that. </p>
 
 <h2>
 <a id="using-deducerhansel" class="anchor" href="#using-deducerhansel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using DeducerHansel</h2>
