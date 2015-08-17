@@ -7,6 +7,8 @@ The Hansel Analysis menu provides access to R methods in a user-friendly way, in
 
 For a **list of features** please see the [associated web page for this repository](http://rscotth.github.io/DeducerHansel/).
 
+To see some **screen shots** you can go to the [wix.com main website for DeducerHansel] ( http://hasc57.wix.com/econometrics-r-gui ). Other web sites that provide a quick introduction to this package are [hasc57.wix.com/deducerhansel site] (http://hasc57.wix.com/deducerhansel) and [deducerhansel.weebly.com] (http://deducerhansel.weebly.com/) , but they have no screen shots and are less informative than the current one.
+
 A copy of the _current development version_ 
 of the R-package `DeducerHansel` is contained in this repository. This package currently only has a development version.
 
@@ -31,7 +33,13 @@ install.packages('devtools')
 ```
 For some parts of this installation, please be patient; notably the installation of the magrittr package, as part of this installation, can take a while. 
 
-After `devtools` has been installed enter the following R commands:
+If in your current session you did not install `devtools` or any other packages, you will need to indicate what CRAN Mirror site to use for installations. This can be done by entering the following command into your R console:
+
+```R
+chooseCRANmirror()
+```
+
+Given `devtools` has been installed and a CRAN Mirror site has been chosen, then all that is left is to enter the following R commands:
 
 ```R
 require(devtools)
