@@ -28,50 +28,40 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <p>The R software environment is freely available and is very popular among statisticians and others for data analysis and development of statisitcal software. It can however be a steep learning curve for many to learn to efficiently use its powerful script commands.</p>
+          <p></p>
 
-<p>DeducerHansel is an econometrics-focused plug-in package for Deducer, an R package that already provides a graphical user interface to access many common statistical methods in R. DeducerHansel adds a Hansel Analysis menu with additional statistical techniques that are popular in economics and various other fields. Unlike what's available in the base Deducer package, the Hansel Analysis menu can work with some time series and spatial data that do not come up in data frame objects. Working through the Hansel Analysis menu also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package. </p>
+<h1>
+<a id="deducerhansel" class="anchor" href="#deducerhansel" aria-hidden="true"><span class="octicon octicon-link"></span></a>DeducerHansel</h1>
+
+<p>DeducerHansel is an econometrics-focused GUI plug-in package for the Deducer R-package. It adds a Hansel Analysis menu with additional statistical techniques that are popular in economics and various other fields. Unlike what's available in the base Deducer package, the Hansel Analysis menu can work with some time series and spatial data that do not come up in data frame objects. Working through the Hansel Analysis menu also has a notably different feel to the way the user interacts with it than what is currently available in the base Deducer package. </p>
 
 <p>The Hansel Analysis menu provides access to R methods in a user-friendly way, in a way similar to <a href="http://gretl.sourceforge.net/">gretl</a>, another econometrics-based free open-source software project (thus the name "Hansel" if you recognize the German fable; it also stands for <strong>Ha</strong>cker's <strong>N</strong>ew <strong>S</strong>election of <strong>E</strong>conometrics <strong>L</strong>ibraries, where "Hacker" refers to the author's surname). But unlike gretl, Hansel Analysis is built within the far more massive universe of R.  </p>
 
+<p>For a <strong>list of features</strong> please see the <a href="http://rscotth.github.io/DeducerHansel/">associated web page for this repository</a>.</p>
+
 <p>To see some <strong>screen shots</strong> you can go to the <a href="http://hasc57.wix.com/econometrics-r-gui">wix.com main website for DeducerHansel</a>. Other web sites that provide a quick introduction to this package are <a href="http://hasc57.wix.com/deducerhansel">hasc57.wix.com/deducerhansel site</a> and <a href="http://deducerhansel.weebly.com/">deducerhansel.weebly.com</a> , but they have no screen shots and are less informative than the current one.</p>
 
-<h2>
-<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
-
-<ol>
-<li>For some of the more basic modeling estimations, such as ordinary least squares, a "pretty" html presentation is provided in
-addition to the classic R output.</li>
-<li>With the modeling estimation and subsequent plots and tests, a "Commands Log" tab is provided to show what R commands are used. </li>
-<li>For ordinary least squares regression there are more plots and more tests than available in the base Deducer package. Robust standard error options are made available on the dialog and explorer pages for models.</li>
-<li>Many of the automatically-generated plots are editable within DeducerHansel.</li>
-<li>Hypothesis testing regarding restrictions on coefficient parameters is done through straightforward typing of the
-null hypothesis, e.g "b(2) = 0".</li>
-<li>For defining new variables to be used in a model, a scroll below the variable selector allow creation of those new variables. This replaces the "Model Builder" page in the base Deducer package.</li>
-<li>Time series data, panel data, and spatial data can be handled. When data comes in a format that is not a data frame, DeducerHansel allows the creation of a "mirror" which is a data frame clone for the purpose of choosing variables in the variable selector (a partial mirror clones just the variable names, a full mirror clones all of the data). Special methods for dealing time series data, panel data and spatial data are provided.</li>
-<li>The R console is ready for commands while DeducerHansel models are being explored-it is not "locked" as in the base Deducer package.</li>
-<li>In Windows operating systems, DeducerHansel can work with either the standard RGui console or RStudio through a "floating menu".This floating menu allows for submenus, which base-Deducer has difficulties with when adding its menu to the standard RGui console.</li>
-<li>Datasets found in installed packages can be selected through a nice scroller.</li>
-<li>Data retrieval from net sources (Oanda, St Louis FRED, and Yahoo!) is available (albeit getting data from St Louis FRED is currently not working due to changes in the web address for the data; the maintainer of getSymbols command is working on that).</li>
-</ol>
+<p>A copy of the <em>current development version</em> 
+of the R-package <code>DeducerHansel</code> is contained in this repository. This package currently only has a development version.</p>
 
 <h2>
-<a id="pre-installation-requirements" class="anchor" href="#pre-installation-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre-Installation requirements</h2>
+<a id="where-deducerhansel-works" class="anchor" href="#where-deducerhansel-works" aria-hidden="true"><span class="octicon octicon-link"></span></a>Where DeducerHansel works</h2>
 
-<p>DeducerHansel has been succesfully tested in Windows and Mac OS-X environments. It may very well work fine in Linux also. <br>
-<br>
-Like the base Deducer package, DeducerHansel needs Java and R to run. More information about these installation issues can be found in <a href="https://github.com/RScottH/DeducerHansel/blob/master/README.md">README.md document</a> at the GitHub repository site for DeducerHansel.</p>
+<p>DeducerHansel, like the Deducer package, is most at home using the JGR console, for which a JGR launcher (discussed later) is useful. If you are using a Windows operating system, DeducerHansel is also available in a "floating menu" through the standard RGui console available in base R and through RStudio, but this floating menu is not available in Mac OS-X. DeducerHansel has not been tested in Linux, but since Deducer works there, DeducerHansel is expected to do so also.</p>
 
-<p>The installation instructions in the next section should be sufficient to install the DeducerHansel package along with the Deducer package it builds upon and the JGR package for which it may be useful, or even necessary, to use.</p>
+<h2>
+<a id="installation-of-java-and-r" class="anchor" href="#installation-of-java-and-r" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation of Java and R</h2>
 
-<p>Deducer and DeducerHansel are most at "home" with the JGR console, for which a JGR launcher is convenient to have. It can sometimes be tricky getting the JGR launcher working in Windows, but in that environment one can still easily use DeducerHansel through a "floating window", available in the standard RGui console or RStudio. </p>
+<p>Java and R need to be installed on your computer before DeducerHansel can be used. </p>
 
-<p>The <a href="https://github.com/RScottH/DeducerHansel/blob/master/README.md">README.md document</a> at the GitHub repository site for DeducerHansel includes information on getting the JGR launcher. </p>
+<p>Java is often required for other software and you may very well already have Java installed on your computer; if not you can follow instructions at the <a href="https://www.oracle.com/java/index.html">Java web page</a> to install Java. </p>
+
+<p>Instructions for installing R are given at the <a href="http://cran.r-project.org/">CRAN web page</a>. For a Windows-based system, if you do not have administrator status then installing R onto C:\Program Files\R-3.1.2 (typically the default; note R-3.1.2 is an example—version numbers do change) could create problems, which can be avoided by installing elsewhere, e.g. onto C:\CRAN R\R-3.1.2 instead. These problems can effect in particular the usability of the JGR launcher, discussed later, or even the installation of DeducerHansel altogether.</p>
 
 <h2>
 <a id="installation-of-deducerhansel" class="anchor" href="#installation-of-deducerhansel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation of DeducerHansel</h2>
 
-<p>The most convenient way to install the <code>DeducerHansel</code> package through GitHub is by using the package <code>devtools</code>,entering the following commands into R: </p>
+<p>The most convenient way to install the <code>DeducerHansel</code> package through github is by using the package <code>devtools</code>, entering the following commands into R:</p>
 
 <p>If you have not already installed <code>devtools</code>, then enter the following R command in your R console to do so:</p>
 
@@ -88,38 +78,120 @@ Like the base Deducer package, DeducerHansel needs Java and R to run. More infor
 <div class="highlight highlight-R"><pre>require(<span class="pl-smi">devtools</span>)
 install_github(<span class="pl-s"><span class="pl-pds">'</span>RScottH/DeducerHansel<span class="pl-pds">'</span></span>)</pre></div>
 
-<p>Don't worry if there is a warning about Rtools being required to build R packages. For some parts of this installation also, please be patient; notably the installation of the zoo package, as part of this installation, can take a while. During the installation on OS-X you may get a message that "the 'make' command requires the command line developer tools" and get prompted on whether you would like to install the tools now. They are not necessary, so you can respond "Not Now" to that. </p>
+<p>Don't worry if there is a warning about Rtools being required to build R packages. For some parts of this installation also, please be patient; notably the installation of the zoo package, as part of this installation, can take a while. </p>
 
 <h2>
-<a id="using-deducerhansel" class="anchor" href="#using-deducerhansel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using DeducerHansel</h2>
+<a id="using-deducerhansel-without-the-jgr-console-in-windows" class="anchor" href="#using-deducerhansel-without-the-jgr-console-in-windows" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using DeducerHansel without the JGR console in Windows</h2>
 
-<p>Loading the DeducerHansel package will get it running. The main menu for DeducerHansel is the Hansel Analysis Menu.
-The <a href="https://github.com/RScottH/DeducerHansel/blob/master/README.md">README.md document</a> at the GitHub repository site for DeducerHansel, has information on getting to the Hansel Analysis menu, but by a little exploration of the available menus you will likely find it on your own.</p>
+<p>In your R console load the DeducerHansel package</p>
 
-<h3>
-<a id="the-reset-button---an-important-tip-for-using-data-frames" class="anchor" href="#the-reset-button---an-important-tip-for-using-data-frames" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Reset button - An important tip for using data frames</h3>
+<p>If you are using the RStudio console, the floating menu should come up automatically when DeducerHansel is loaded, but it may be hidden behind the RStudio console initially.</p>
 
-<p>If a data frame is added to your workspace, then it may not show up initially when you look at available data frames in the variable selector. Next to the scroller on available data frames is a reset button, which you can double-click to bring up the latest data frames and clear variable selections. </p>
-
-<p>This is in contrast to what occurs in the base Deducer package, in which available data frames for the variable selector are updated automatically. That is not done in DeducerHansel so that choices of variables by the user would be remembered more frequently. Therefore as a user you can, for example, change from a binary logit specification to a binary probit one without re-selecting your variables. But it is at the cost of you needing to manually reset the available data frames when you adds one to the workspace (one exception-if the variable selector has not been previously opened then it will look for available data frames automatically).</p>
-
-<h3>
-<a id="demonstration-data" class="anchor" href="#demonstration-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demonstration data</h3>
-
-<p>The <a href="https://github.com/RScottH/DeducerHansel/blob/master/DEMONSTRATIONS.md">DEMONSTRATIONS.md document</a>  at the GitHub repository site for DeducerHansel, has information on how to get the datasets that have been frequently used to test and demonstrate the methods available in DeducerHansel.</p>
+<p>If you are using the standard RGui console go to the menu 'Hansel' and click on 'Open Floating Menu' to get the floating menu.</p>
 
 <h2>
-<a id="author" class="anchor" href="#author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author</h2>
+<a id="using-deducerhansel-with-jgr-console-without-jgr-launcher" class="anchor" href="#using-deducerhansel-with-jgr-console-without-jgr-launcher" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using DeducerHansel with JGR console, without JGR launcher</h2>
 
-<p>The author of the DeducerHansel package is<br> 
-R. Scott Hacker (<a href="https://github.com/RScottH" class="user-mention">@RScottH</a>).<br> 
-Professor in Applied Econometrics and International Economics<br> 
-Jönköping University<br> 
-Jönköping International Business School<br> 
-Jönköping, Sweden<br> 
-<a href="http://hj.se/jibs/en/research/persons/scott-hacker.html">author's school web site</a></p>
+<p>In your R console load the DeducerHansel package and enter the command </p>
 
-<p></p>
+<div class="highlight highlight-R"><pre>JGR()</pre></div>
+
+<p>The JGR console will pop up, and you can load DeducerHansel again there. If you close RStudio at this point, JGR will go away, but that is not the case with the R base console.</p>
+
+<p>The nuisance of having to go through another console to get the JGR console everytime you want to use JGR is a nuisance which having the JGR launcher useful will avoid.</p>
+
+<h2>
+<a id="getting-the-jgr-launcher" class="anchor" href="#getting-the-jgr-launcher" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting the JGR launcher.</h2>
+
+<p>If you wish to work regularly with the JGR console, then ideally you should have the JGR launcher. </p>
+
+<p>Go to the <a href="http://www.rforge.net/JGR/">JGR web page</a> to get the JGR launcher, which is an executable file with an icon that can be placed on your desktop. In that web page the launcher is found in the “Download” section after the “what’s new section” [Don’t use the “Download/Files” link at the top left of the page, as the downloads seem to be more out-of-date there]. </p>
+
+<p>(i) Windows
+Get the latest 32-bit version for windows, which at the time of this document is called “jgr-1 62.exe” (this name may change with later JGR versions). Simply download the file and copy or drag it to your desktop and open it (you may need to run it as un adminstrator). <strong>Note: I have had mixed success in making this work on Windows, particularly on my own school's computers. My best guess now is that it hangs on some security protection. If you can't make it work, don't despair--there is still the floating-menu version available off of the RGui console or Rstudio.</strong> </p>
+
+<p>(ii) Mac OS-X
+Get the universal binary (JGR*.dmg) listed which is most appropriate for your system. </p>
+
+<h2>
+<a id="loading-deducerhansel-in-jgr" class="anchor" href="#loading-deducerhansel-in-jgr" aria-hidden="true"><span class="octicon octicon-link"></span></a>Loading DeducerHansel in JGR</h2>
+
+<p>The first time you open JGR, Deducer and DeducerHansel will not be loaded (if you see “Analysis” in the top menu bar, Deducer is loaded). To load Deducer and DeducerHansel, click on Packages &amp; Data&gt; Package Manager and find these packages in the list of packages. On each click on the left box (to load) and on the right box (to automatically load every time JGR is opened) and click on Refresh and then close the Package Manager.</p>
+
+<h2>
+<a id="the-reset-button---an-important-tip-for-using-dataframes" class="anchor" href="#the-reset-button---an-important-tip-for-using-dataframes" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Reset button - An important tip for using dataframes</h2>
+
+<p>If a dataframe is added to your workspace, then it may not show up initially when you look at available dataframes in the variable selector. Next to the scroller on available dataframes is a reset button, which you can double-click to bring up the latest dataframes and clear variable selections. </p>
+
+<p>This is in contrast to what occurs in the base Deducer package, in which avaialable dataframes for the variable selector are updated automatically. That is not done in DeducerHansel so that choices of variables by the user would be remembered more frequently--so as a user you can, for example, change from a binary logit specification to a binary probit one without re-selecting your variables. But it is at the cost of you needing to manually reset the available dataframes when you adds one to the workspace (one exception-if the variable selector has not been previously opened then it will look for available dataframes automatically).</p>
+
+<h2>
+<a id="information-on-deducer" class="anchor" href="#information-on-deducer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Information on Deducer</h2>
+
+<p>Please check out the <a href="http://www.Deducer.org">Deducer web page</a> for more information on Deducer.</p>
+
+<h2>
+<a id="bug-reports" class="anchor" href="#bug-reports" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bug reports</h2>
+
+<p>Users of package <code>DeducerHansel</code> are very welcome to report bugs at the github page for the package. To initiate a new bug report or feature request, click on <em>issue</em> in the menu found to the right.</p>
+
+<h2>
+<a id="copyright-license-and-warranty-information" class="anchor" href="#copyright-license-and-warranty-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright, license and warranty information</h2>
+
+<p>The DeducerHansel package has the following copyright:</p>
+
+<p>Copyright (C) 2015 R. Scott H/\ker,with "/\" replaced with "ac",
+Professor of Applied Econometrics and International Economics,
+Jönköping University,
+Jönköping International Business School,
+Jönköping, Sweden.</p>
+
+<p>The DeducerHansel package is free software; you can
+redistribute it and/or modify it under the terms of the GNU 
+General Public License version 2 (GPLv2), as published by the Free Software Foundation.</p>
+
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details. A copy of the GPLv2 license is provided in the main DeducerHansel directory. If you have not received it, instructions for seeing it are provided 
+when DeducerHansel is loaded into R. Otherwise it is also
+available at <a href="http://www.gnu.org/licenses/gpl-2.0.html">http://www.gnu.org/licenses/gpl-2.0.html</a>, or you can write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.</p>
+
+<h2>
+<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributors</h2>
+
+<p>I thank Abdulnasser Hatemi-J for his ideas early in the development of this package.</p>
+
+<p>I thank Peter Karlsson, Dawoud Asalya, and Saher Malik in their testing of earlier versions of this package.</p>
+
+<h2>
+<a id="attribution-for-earlier-source-code" class="anchor" href="#attribution-for-earlier-source-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attribution for earlier source code</h2>
+
+<p>The following packages provided some source code that was 
+used in the DeducerHansel package. All of these packages are covered by GPLv2. </p>
+
+<p>Java source code:
+Deducer (0.7-6 version, dated 2012-12-05),
+     by Ian Fellows</p>
+
+<p>DeducerPlugInExample (0.2-0 version, dated 2012-03-16),
+     by Ian Fellows</p>
+
+<p>DeducerSpatial package (0.7 version, dated 2013-04-12),
+     by Ian Fellows and Alex Rickett with contributions 
+             from Neal Fultz.             </p>
+
+<p>JGR package (1.7 -18 version, downloaded 2015-07-15),
+     by Markus Helbig, Simon Urbanek and Ian Fellows.</p>
+
+<p>R souce code:
+DeducerPlugInExample (0.2-0 version, dated 2012-03-16),
+      by Ian Fellows</p>
+
+<p>RCmdr (1.6-6 version, dated 2013-03-15) 
+       by John Fox and Milan Bouchet-Valat, with
+       various contributors
+       (one line of R code, but an important one!)</p>
 
 
         </section>
