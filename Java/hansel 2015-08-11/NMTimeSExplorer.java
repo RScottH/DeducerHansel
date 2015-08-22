@@ -15,7 +15,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
   ModelExplorer.java and GLMExplorer.java, GLMExplorerPostHoc.java and PlotBuilder.java, found in the Deducer package.
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-22.
  */
 
 package hansel;
@@ -269,6 +269,12 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
         public String ltext= "";
         
         public boolean variableTransformation = false;
+        
+        public String nameAdjustedForTS = "";
+        public Boolean nullDimension = false;
+        public Boolean nullColNames = false;
+        public String vNameSimplifiedCharacters = "";
+        public String vNameOrTSLabel = "";
         
         protected DefaultComboBoxModel filtersExplorer  = new DefaultComboBoxModel(
                 				new String[] {"Choose change below","No Smoother/Filter/Forecast","Moving Average",
@@ -715,7 +721,41 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
                                              vNameAdjusted = "ts("+vNameAdjusted+")"; 
 
                                    vNameAdjustedZoo = "zoo("+vNameAdjusted+")";
-                           }               
+                           }      
+                   if (model.terms.getSize()==1){
+                       String startNA = "";
+                       String endNA = "";
+                       
+                       try {
+                            startNA  = Deducer.eval("is.na("+vNameAdjusted+")[1]").asString();
+                            endNA  = Deducer.eval("is.na("+vNameAdjusted+")[length("+vNameAdjusted+")]").asString();
+                            nullDimension  = Deducer.eval("is.null(dim("+vNameAdjusted+"))").asString().equals("TRUE");
+                            nullColNames  = Deducer.eval("is.null(colnames("+vNameAdjusted+"))" ).asString().equals("TRUE");
+                            }catch(Exception e){
+                            new ErrorMsg(e);
+                            }
+                       if (startNA.equals("TRUE")||endNA.equals("TRUE")){
+                               if (model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo")||model.dataClassInR.equals("zooreg"))
+                                 vNameAdjusted= "na.trim("+vNameAdjusted+")";
+                               else {
+                                 vNameAdjusted= "na.trim(zoo("+vNameAdjusted+"))"; 
+                               }
+                          }
+                     if (!existsTS&!(vNameAdjusted.contains("ts(")||vNameAdjusted.contains("zoo("))) {
+                         nameAdjustedForTS= "as.ts("+vNameAdjusted+")";
+                         nullDimension = true;
+                         nullColNames =true;
+                     }
+                     else
+                         nameAdjustedForTS = vNameAdjusted;
+                       
+                   }
+                    vNameOrTSLabel = (modelTSdata?model.efeglmextra.TSlabels:vName);
+                    vNameSimplifiedCharacters = vNameOrTSLabel.replace(" ","_").replace("-","_").replace("(","_").replace(")","").replace("^","_pwr").replace(":","").replace("\"", "");       
+                           
+                           
+                           
+                           
                          if (existsTS){
                              if (model.frequency_of_original_data.equals("12"))
                                 model.rowNamesOrDatesLabel = "as.yearmon(time("+vNameAdjusted+"))"; 
@@ -917,7 +957,7 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 								BorderLayout morePlotsPanelLayout = new BorderLayout();
 								GeneralPlotsPanel3.setLayout(morePlotsPanelLayout);
                                                                 GeneralPlotsPanel3.setFont(font11);
-								GeneralPlotsPanel3.setBorder(BorderFactory.createTitledBorder("Lag relationships: Given Series"));							
+								GeneralPlotsPanel3.setBorder(BorderFactory.createTitledBorder("Lag relationships for " + vNameOrTSLabel));							
                                                                 GeneralPlotsPanel3.setVisible(false);
 							}
                                                         
@@ -932,7 +972,7 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 								BorderLayout morePlotsPanelLayout = new BorderLayout();
 								GeneralPlotsPanel4.setLayout(morePlotsPanelLayout);
                                                                 GeneralPlotsPanel4.setFont(font11);
-								GeneralPlotsPanel4.setBorder(BorderFactory.createTitledBorder("Lag relationships: Given Series Squared"));							
+								GeneralPlotsPanel4.setBorder(BorderFactory.createTitledBorder("Lag relationships for the square of "+ vNameOrTSLabel));							
                                                                 GeneralPlotsPanel4.setVisible(false);
 							}
                                                         {
@@ -1274,12 +1314,11 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
                     }catch(Exception e){
                     new ErrorMsg(e);
                     }
-                existsTS = existsHanselWorkingEnv.equals("TRUE");
                 if (existsHanselWorkingEnv.equals("TRUE")) {
-                    plotPanelsDevNumsName = ".hansel.working.env$plotPanelsDevNums";
+                    plotPanelsDevNumsName = Hansel.hanselEnv+"$plotPanelsDevNumsTS";
                 }  else {
-                    Deducer.eval(".hansel.working.env <- new.env(parent=emptyenv())\n");
-                    plotPanelsDevNumsName = ".hansel.working.env$plotPanelsDevNums";
+                    Deducer.eval(Hansel.hanselEnv+"<- new.env(parent=emptyenv())\n");
+                    plotPanelsDevNumsName = Hansel.hanselEnv+"$plotPanelsDevNumsTS";
                 }   
                         
                 
@@ -1957,7 +1996,16 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
                 ArrayList tmp = new ArrayList();
                 String timeSeriesObserved =  vNameAdjusted.toString();
                 
-                String urtOutputName = Deducer.getUniqueName("urtOutput");
+                String existsurtOutput = new String();
+                  try {
+                    existsurtOutput = Deducer.eval("as.character(exists(\".hansel.working.env$urtOutput\"))").asString();  
+                    }catch(Exception e){
+                    new ErrorMsg(e);
+                    }
+                if (existsurtOutput.equals("TRUE"))
+                    Deducer.eval("rm(urtOutput,envir="+Hansel.hanselEnv+")");   
+                
+                String urtOutputName = Hansel.hanselEnv+"$urtOutput";
                 
                  if(specificURTest=="Augmented Dickey-Fuller"){
                          call=   urtOutputName+ " <- ur.df("+
@@ -2157,7 +2205,7 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
                   {try{
                         GeneralPlotsPanel6.removeAll();
                         GeneralPlotsPanel6.setVisible(false);
-                        String call="hist(as.numeric("+vNameAdjusted+"), freq=FALSE, col= \"light blue\", main=\"Histogram\",xlab=\""+vName+"\")\n"+
+                        String call="hist(as.numeric("+vNameAdjusted+"), freq=FALSE, col= \"light blue\", main=\"Histogram\",xlab=\""+vNameOrTSLabel+"\")\n"+
                                     "curve(dnorm(x, mean=mean(as.numeric(na.omit("+vNameAdjusted+"))),sd=sd(as.numeric(na.omit("+vNameAdjusted+")))), add=TRUE, lty=2, col=\"red\")\n"+
                                     "lines(density(as.numeric(na.omit("+vNameAdjusted+"))), lwd=1,col=\"blue\")\n";       
                         commandsLogText.setText(commandsLogText.getText() + 
@@ -2192,21 +2240,12 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 		    }    
                   }
                } else if (model.efeaeplots.moreDiagnosticPlots.equals("autocorrelation function for given series")) {
-                   String nameAdjustedForMissingAndTS = "";
-                   if ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))&
-                                (vNameAdjusted.contains("lag(")||vNameAdjusted.contains("diff(")))
-                              nameAdjustedForMissingAndTS = vNameAdjusted+"[!is.na("+vNameAdjusted+"),]";
-                        else
-                              nameAdjustedForMissingAndTS = vNameAdjusted;
-                        if (!existsTS&!vNameAdjusted.contains("ts("))
-                            nameAdjustedForMissingAndTS= "as.ts("+vNameAdjusted+")";
-                  
                   {try{
                         GeneralPlotsPanel6.removeAll();
                         GeneralPlotsPanel6.setVisible(false);
 
                         
-                        String call="acf("+nameAdjustedForMissingAndTS+
+                        String call="acf("+nameAdjustedForTS+
                                           (model.UTSOtherPlotsOptions.maxLag.equals("default")?",,":",lag.max="+model.UTSOtherPlotsOptions.maxLag+",")
                                          +"\"correlation\",main=\""+vName+"\",col=2)\n";
  
@@ -2224,18 +2263,10 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 		    }    
                   }
                } else if (model.efeaeplots.moreDiagnosticPlots.equals("autocovariance function for given series")) {
-                   String nameAdjustedForMissingAndTS = "";
-                   if ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))&
-                                (vNameAdjusted.contains("lag(")||vNameAdjusted.contains("diff(")))
-                              nameAdjustedForMissingAndTS = vNameAdjusted+"[!is.na("+vNameAdjusted+"),]";
-                        else
-                              nameAdjustedForMissingAndTS = vNameAdjusted;
-                        if (!existsTS&!vNameAdjusted.contains("ts("))
-                            nameAdjustedForMissingAndTS= "as.ts("+vNameAdjusted+")";
                   {try{
                         GeneralPlotsPanel6.removeAll();
                         GeneralPlotsPanel6.setVisible(false);
-                        String call="acf("+nameAdjustedForMissingAndTS+
+                        String call="acf("+nameAdjustedForTS+
                                 (model.UTSOtherPlotsOptions.maxLag.equals("default")?",,":",lag.max="+model.UTSOtherPlotsOptions.maxLag+",")+
                                 "\"covariance\",main=\""+vName+"\",col=6)\n";
 
@@ -2252,18 +2283,10 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 		    }    
                   }
                }  else if (model.efeaeplots.moreDiagnosticPlots.equals("partial autocorrelation for given series")) {
-                   String nameAdjustedForMissingAndTS = "";
-                   if ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))&
-                                (vNameAdjusted.contains("lag(")||vNameAdjusted.contains("diff(")))
-                              nameAdjustedForMissingAndTS = vNameAdjusted+"[!is.na("+vNameAdjusted+"),]";
-                        else
-                              nameAdjustedForMissingAndTS = vNameAdjusted;
-                        if (!existsTS&!vNameAdjusted.contains("ts("))
-                            nameAdjustedForMissingAndTS= "as.ts("+vNameAdjusted+")";
                   {try{
                         GeneralPlotsPanel6.removeAll();
                         GeneralPlotsPanel6.setVisible(false);
-                        String call="acf("+nameAdjustedForMissingAndTS+
+                        String call="acf("+nameAdjustedForTS+
                                      (model.UTSOtherPlotsOptions.maxLag.equals("default")?",,":",lag.max="+model.UTSOtherPlotsOptions.maxLag+",")+
                                       "\"partial\",main=\""+vName+"\",col=3)\n";
 
@@ -2280,18 +2303,10 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 		    }    
                   }
                } else if (model.efeaeplots.moreDiagnosticPlots.equals("autocorrelation function for given series squared")) {
-                   String nameAdjustedForMissingAndTS = "";
-                   if ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))&
-                                (vNameAdjusted.contains("lag(")||vNameAdjusted.contains("diff(")))
-                              nameAdjustedForMissingAndTS = vNameAdjusted+"[!is.na("+vNameAdjusted+"),]";
-                        else
-                              nameAdjustedForMissingAndTS = vNameAdjusted;
-                        if (!existsTS&!vNameAdjusted.contains("ts("))
-                            nameAdjustedForMissingAndTS= "as.ts("+vNameAdjusted+")";
                   {try{
                         GeneralPlotsPanel6.removeAll();
                         GeneralPlotsPanel6.setVisible(false);
-                        String call="acf(("+nameAdjustedForMissingAndTS+")^2"+
+                        String call="acf(("+nameAdjustedForTS+")^2"+
                                    (model.UTSOtherPlotsOptions.maxLag.equals("default")?",,":",lag.max="+model.UTSOtherPlotsOptions.maxLag+",")+
                                     "\"correlation\",main=\"("+vName+")^2\",col=2)\n";
                         
@@ -2308,18 +2323,10 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 		    }    
                   }
                } else if (model.efeaeplots.moreDiagnosticPlots.equals("autocovariance function for given series squared")) {
-                   String nameAdjustedForMissingAndTS = "";
-                   if ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))&
-                                (vNameAdjusted.contains("lag(")||vNameAdjusted.contains("diff(")))
-                              nameAdjustedForMissingAndTS = vNameAdjusted+"[!is.na("+vNameAdjusted+"),]";
-                        else
-                              nameAdjustedForMissingAndTS = vNameAdjusted;
-                        if (!existsTS&!vNameAdjusted.contains("ts("))
-                            nameAdjustedForMissingAndTS= "as.ts("+vNameAdjusted+")";
                   {try{
                         GeneralPlotsPanel6.removeAll();
                         GeneralPlotsPanel6.setVisible(false);
-                        String call="acf(("+nameAdjustedForMissingAndTS+")^2"+
+                        String call="acf(("+nameAdjustedForTS+")^2"+
                                 (model.UTSOtherPlotsOptions.maxLag.equals("default")?",,":",lag.max="+model.UTSOtherPlotsOptions.maxLag+",")+
                                 "\"covariance\",main=\"("+vName+")^2\",col=6)\n";
                         commandsLogText.setText(commandsLogText.getText() + 
@@ -2335,18 +2342,10 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 		    }    
                   }
                } else if (model.efeaeplots.moreDiagnosticPlots.equals("partial autocorrelation for given series squared")) {
-                   String nameAdjustedForMissingAndTS = "";
-                   if ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))&
-                                (vNameAdjusted.contains("lag(")||vNameAdjusted.contains("diff(")))
-                              nameAdjustedForMissingAndTS = vNameAdjusted+"[!is.na("+vNameAdjusted+"),]";
-                        else
-                              nameAdjustedForMissingAndTS = vNameAdjusted;
-                        if (!existsTS&!vNameAdjusted.contains("ts("))
-                            nameAdjustedForMissingAndTS= "as.ts("+vNameAdjusted+")";
                   {try{
                         GeneralPlotsPanel6.removeAll();
                         GeneralPlotsPanel6.setVisible(false);
-                        String call="acf(("+nameAdjustedForMissingAndTS+")^2"+
+                        String call="acf(("+nameAdjustedForTS+")^2"+
                                      (model.UTSOtherPlotsOptions.maxLag.equals("default")?",,":",lag.max="+model.UTSOtherPlotsOptions.maxLag+",")+
                                      "\"partial\",main=\"("+vName+")^2\",col=3)\n";
                         commandsLogText.setText(commandsLogText.getText() + 
@@ -2362,14 +2361,7 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 		    }    
                   }
                } else if (model.efeaeplots.moreDiagnosticPlots.equals("Given Series vs Lag")) {
-                   String nameAdjustedForMissingAndTS = "";
-                   if ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))&
-                                (vNameAdjusted.contains("lag(")||vNameAdjusted.contains("diff(")))
-                              nameAdjustedForMissingAndTS = vNameAdjusted+"[!is.na("+vNameAdjusted+"),]";
-                        else
-                              nameAdjustedForMissingAndTS = vNameAdjusted;
-                        if (!existsTS&!vNameAdjusted.contains("ts("))
-                            nameAdjustedForMissingAndTS= "as.ts("+vNameAdjusted+")";
+
                   {try{
                         GeneralPlotsPanel6.removeAll();
                         GeneralPlotsPanel6.setVisible(false);
@@ -2389,17 +2381,20 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
                                 lagsFormula = ",set.lags="+model.UTSOtherPlotsOptions.minLag;
                             else 
                                 lagsFormula = ",set.lags="+model.UTSOtherPlotsOptions.minLag+":"+model.UTSOtherPlotsOptions.maxLag;
+                            
+                        String call = "";
                         
-                        //tempName is created to work-around the fact that lag.plot does not allow renaming of y-axis. 
-                        
-                        String vNameSimplifiedCharacters = (modelTSdata?model.efeglmextra.TSlabels:vName).replace(" ","_").replace("-","_").replace("(","_").replace(")","").replace("^","_pwr").replace(":","").replace("\"", "")+"__";
-                        String tempName = Deducer.getUniqueName(vNameSimplifiedCharacters);
-                        String call= tempName +"<-"+nameAdjustedForMissingAndTS+
-                                   ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))?
-                                        "\ncolnames("+vNameSimplifiedCharacters+") <- \"" + tempName +"\"":"")+
+                        if (vNameSimplifiedCharacters.equals(nameAdjustedForTS)&!nullDimension&!nullColNames) {
+                            call = "lag.plot("+nameAdjustedForTS+","+lagsFormula + ",do.lines=FALSE,diag.col=\"gold\",col=4)";
+                        } else {
+                            //tempName is created to work-around the fact that lag.plot does not allow renaming of y-axis. 
+                            String tempName = Deducer.getUniqueName("."+vNameSimplifiedCharacters+".");
+                            call= tempName +"<-"+nameAdjustedForTS+
+                                    (nullDimension?"\ndim("+tempName+") <- c(length("+tempName+"),1)":"")+
+                                    ((nullColNames||nameAdjustedForTS.contains("("))?"\ncolnames("+tempName+")<-\""+vNameOrTSLabel+"\"":"")+
                                     "\nlag.plot("+tempName+","+lagsFormula + ",do.lines=FALSE,diag.col=\"gold\",col=4)"+
                                     "\nrm("+tempName+")"; 
-
+                        }
                         
                         commandsLogText.setText(commandsLogText.getText() + 
                                         "\n\n#*************plot commands for Normal Q-Q *************\n"+
@@ -2631,8 +2626,9 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 	public void windowOpened(WindowEvent arg0) {}
         
         public void distributionClicked(){
+                    
                    String call="par(mfrow = c(1, 2),mar=c(5,4,2,2))\n"+
-                                    "hist(as.numeric("+vNameAdjusted+"), freq=FALSE, col= \"light blue\", main=\"Histogram\",xlab=\""+vName+"\")\n"+
+                                    "hist(as.numeric("+vNameAdjusted+"), freq=FALSE, col= \"light blue\", main=\"Histogram\",xlab=\""+vNameOrTSLabel+"\")\n"+
                                     "curve(dnorm(x, mean=mean(as.numeric(na.omit("+vNameAdjusted+"))),sd=sd(as.numeric(na.omit("+vNameAdjusted+")))), add=TRUE, lty=2, col=\"red\")\n"+
                                     "lines(density(as.numeric(na.omit("+vNameAdjusted+"))), lwd=1,col=\"blue\")\n"+
                                     "qqnorm(as.numeric("+vNameAdjusted+"),ylab=\"Quantiles\");qqline(as.ts(as.numeric("+vNameAdjusted+"),col=2))\n"; 
@@ -2646,18 +2642,10 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
 	}
         
             public void correlogramsClicked(){
-                     String nameAdjustedForMissingAndTS = "";
-                       if ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))&
-                                    (vNameAdjusted.contains("lag(")||vNameAdjusted.contains("diff(")))
-                                  nameAdjustedForMissingAndTS = vNameAdjusted+"[!is.na("+vNameAdjusted+"),]";
-                            else
-                                  nameAdjustedForMissingAndTS = vNameAdjusted;
-                            if (!existsTS&!vNameAdjusted.contains("ts("))
-                                nameAdjustedForMissingAndTS= "as.ts("+vNameAdjusted+")";
                        String call="par(mfrow = c(1, 3),mar=c(5,4,2,2))\n"+
-                             "acf("+nameAdjustedForMissingAndTS+",,\"correlation\",main=\"\",col=2)\n"+
-                             "acf("+nameAdjustedForMissingAndTS+",,\"covariance\",main=\"\",col=6)\n"+
-                             "acf("+nameAdjustedForMissingAndTS+",,\"partial\",main=\"\",col=3)";
+                             "acf("+nameAdjustedForTS+",,\"correlation\",main=\"\",col=2)\n"+
+                             "acf("+nameAdjustedForTS+",,\"covariance\",main=\"\",col=6)\n"+
+                             "acf("+nameAdjustedForTS+",,\"partial\",main=\"\",col=3)";
                        commandsLogText.setText(commandsLogText.getText() + 
                                         "\n\n#*************plot commands for Correlograms for Given Series *************\n"+
                                          "JavaGD() #Opens a new graphic device\n"+ call);
@@ -2667,9 +2655,9 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
                         Deducer.eval(plotPanelsDevNumsName+"[3] <- dev.cur()");
                  
                         call="par(mfrow = c(1, 3),mar=c(5,4,2,2))\n"+
-                             "acf(("+nameAdjustedForMissingAndTS+")^2,,\"correlation\",main=\"\",col=2)\n"+
-                             "acf(("+nameAdjustedForMissingAndTS+")^2,,\"covariance\",main=\"\",col=6)\n"+
-                             "acf(("+nameAdjustedForMissingAndTS+")^2,,\"partial\",main=\"\",col=3)";
+                             "acf(("+nameAdjustedForTS+")^2,,\"correlation\",main=\"\",col=2)\n"+
+                             "acf(("+nameAdjustedForTS+")^2,,\"covariance\",main=\"\",col=6)\n"+
+                             "acf(("+nameAdjustedForTS+")^2,,\"partial\",main=\"\",col=3)";
                         commandsLogText.setText(commandsLogText.getText() + 
                                         "\n\n#*************plot commands for Correlograms for Given Series Squared*************\n"+
                                          "JavaGD() #Opens a new graphic device\n"+ call);
@@ -2680,23 +2668,22 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
  
 	}    
        public void plotvsLagsClicked(){
-                     String nameAdjustedForMissingAndTS = "";
-                           if ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))&
-                                        (vNameAdjusted.contains("lag(")||vNameAdjusted.contains("diff(")))
-                                      nameAdjustedForMissingAndTS = vNameAdjusted+"[!is.na("+vNameAdjusted+"),]";
-                                else
-                                      nameAdjustedForMissingAndTS = vNameAdjusted;
-                                if (!existsTS&!vNameAdjusted.contains("ts("))
-                                    nameAdjustedForMissingAndTS= "as.ts("+vNameAdjusted+")";
+                                         /* JOptionPane.showMessageDialog(null, "debug2 vName="+vName);
+                                          JOptionPane.showMessageDialog(null, "debug3 model.efeglmextra.TSlabels="+model.efeglmextra.TSlabels);*/
 
-                        String vNameSimplifiedCharacters = (modelTSdata?model.efeglmextra.TSlabels:vName).replace(" ","_").replace("-","_").replace("(","_").replace(")","").replace("^","_pwr").replace(":","").replace("\"", "")+"__";
-                        String tempName = Deducer.getUniqueName(vNameSimplifiedCharacters);
-                        String call= tempName +"<-"+nameAdjustedForMissingAndTS+
-                                   ((model.dataClassInR.equals("xts")||model.dataClassInR.equals("zoo"))?
-                                        "\ncolnames("+vNameSimplifiedCharacters+") <- \"" + tempName +"\"":"")+
+                        String call = "";
+                        
+                        if (vNameSimplifiedCharacters.equals(nameAdjustedForTS)&!nullDimension&!nullColNames) {
+                            call = "lag.plot("+nameAdjustedForTS+",4,do.lines=FALSE,diag.col=\"gold\",col=4)";
+                        } else {
+                            //tempName is created to work-around the fact that lag.plot does not allow renaming of y-axis. 
+                            String tempName = Deducer.getUniqueName("."+vNameSimplifiedCharacters+".");
+                            call= tempName +"<-"+nameAdjustedForTS+
+                                    (nullDimension?"\ndim("+tempName+") <- c(length("+tempName+"),1)":"")+
+                                    ((nullColNames||nameAdjustedForTS.contains("("))?"\ncolnames("+tempName+")<-\""+vNameOrTSLabel+"\"":"")+
                                     "\nlag.plot("+tempName+",4,do.lines=FALSE,diag.col=\"gold\",col=4)"+
-                                    "\nrm("+tempName+")";          
-
+                                    "\nrm("+tempName+")"; 
+                        }     
                         commandsLogText.setText(commandsLogText.getText() + 
                                         "\n\n#*************plot commands for Plot vs Lags *************\n"+
                                          "JavaGD() #Opens a new graphic device\n"+ call);
@@ -3424,12 +3411,12 @@ public class NMTimeSExplorer extends NMBasicExplorer implements WindowListener{
                         if(cmd==" Cancel "){  
                                 for(int i=1;i<=11;i++)
                                           Deducer.eval("dev.off("+plotPanelsDevNumsName+"["+i+"])");
-                                Deducer.eval("rm("+plotPanelsDevNumsName+")");                  
+                                Deducer.eval("rm(plotPanelsDevNumsTS,envir="+Hansel.hanselEnv+")");   
 				cancel();
                         }else if(cmd=="Initial Selections Page"){
                                 for(int i=1;i<=11;i++)
                                           Deducer.eval("dev.off("+plotPanelsDevNumsName+"["+i+"])");
-                                Deducer.eval("rm("+plotPanelsDevNumsName+")");
+                                Deducer.eval("rm(plotPanelsDevNumsTS,envir="+Hansel.hanselEnv+")");   
 				  cancel();
 				specifyClicked();
 			}else if(cmd=="Update Model"){

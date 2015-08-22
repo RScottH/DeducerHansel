@@ -17,7 +17,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
   ExampleDialog.java,found in the DeducerPlugInExample package.
   
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-22.
  */
 
 package hansel;
@@ -728,27 +728,27 @@ public class DToolsDataFromWeb  extends JDialog implements ActionListener {
                         }catch(Exception e){
                         new ErrorMsg(e);
                         }
-                if (classOfData.equals("ts")||classOfData.equals("mts")||classOfData.equals("xts")||classOfData.equals("zoo")){
+                if (classOfData.equals("ts")||classOfData.equals("mts")||classOfData.equals("xts")||classOfData.equals("zoo")||classOfData.equals("zooreg")){
                 
-                if (mirrorType.getSelectedItemText()=="full mirror"){
-                     if (classOfData.equals("xts")) {
-                     cmd = "\n "+downloadObject+(classOfData.equals("xts")?"<-"+downloadObject:"<-zoo("+downloadObject+")")+
-                           "\n "+downloadObject+"__<-data.frame("+downloadObject+")";
-                     }
-
-                    }else 
-                    cmd = "\n if (is.null(colnames("+downloadObject+") )) {"+
-                              "colnames("+downloadObject+") <- \""+downloadObject+"\""+
-                          "\n .hansel.temp.dimnamesToUse <-colnames("+downloadObject+")"+
-                          "\n "+downloadObject+"__<- data.frame(rbind(.hansel.temp.dimnamesToUse))"+
-                          "\n dimnames("+downloadObject+"__)[[2]] <-   .hansel.temp.dimnamesToUse"+
-                          "\n "+downloadObject+(classOfData.equals("xts")?"<-"+downloadObject:"<-zoo("+downloadObject+")")+
-                          "}else {"+
-                     "\n "+downloadObject+(classOfData.equals("xts")?"<-"+downloadObject:"<-zoo("+downloadObject+")")+
-                     "\n .hansel.temp.dimnamesToUse <-colnames("+downloadObject+")"+
-                     "\n "+downloadObject+"__<- data.frame(rbind(.hansel.temp.dimnamesToUse))"+
-                     "\n dimnames("+downloadObject+"__)[[2]] <-   .hansel.temp.dimnamesToUse}"+
-                     "\n rm(.hansel.temp.dimnamesToUse)";
+                    if (mirrorType.getSelectedItemText()=="full mirror"){
+                        /* if (classOfData.equals("xts")) {
+                         cmd = "\n "+downloadObject+(classOfData.equals("xts")?"<-"+downloadObject:"<-zoo("+downloadObject+")")+
+                               "\n "+downloadObject+"__<-data.frame("+downloadObject+")";
+                         } */
+                         cmd = "\n "+downloadObject+"__<-data.frame("+downloadObject+")";
+                        }else 
+                        cmd = "\n if (is.null(colnames("+downloadObject+") )) {"+
+                                  "colnames("+downloadObject+") <- \""+downloadObject+"\""+
+                              "\n .hansel.temp.dimnamesToUse <-colnames("+downloadObject+")"+
+                              "\n "+downloadObject+"__<- data.frame(rbind(.hansel.temp.dimnamesToUse))"+
+                              "\n dimnames("+downloadObject+"__)[[2]] <-   .hansel.temp.dimnamesToUse"+
+                              "\n "+downloadObject+(classOfData.equals("xts")?"<-"+downloadObject:"<-zoo("+downloadObject+")")+
+                              "}else {"+
+                         "\n "+downloadObject+(classOfData.equals("xts")?"<-"+downloadObject:"<-zoo("+downloadObject+")")+
+                         "\n .hansel.temp.dimnamesToUse <-colnames("+downloadObject+")"+
+                         "\n "+downloadObject+"__<- data.frame(rbind(.hansel.temp.dimnamesToUse))"+
+                         "\n dimnames("+downloadObject+"__)[[2]] <-   .hansel.temp.dimnamesToUse}"+
+                         "\n rm(.hansel.temp.dimnamesToUse)";
                 }
                 Deducer.execute(cmd);
                 Deducer.eval(cmd);  

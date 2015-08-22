@@ -1,3 +1,17 @@
+     CHANGES IN DeducerHansel VERSION 0.4-3.001 (2015-08-22)
+
+BUG FIXES
+o When loading a dataset, there was a benign bug that produced an error message regarding an unexpected symbol in "capture.output( The object". That bug has been fixed. 
+o The shutting down of graphics devices has been improved, correcting an error that sometimes occured on cancellation of an explorer window from the request                                         "rm(.hansel.working.env$plotPanelsDevNums)".
+o Previously when loading datasets there was an indication that a mirrored object was created when sometimes it wasn't. That problem has been fixed and in general the information about a mirror object has improved.
+o In collecting objects that contain time series data, zooreg objects have been included in lists in Hansel.java, DtoolsDataFromWeb.java, and DtoolsMirrorsFromZoots.java, correcting a bug that a dataset such as DJIA from the strucchange package could not be loaded since its class was "zooreg" in the first position and "zoo" in the second.
+o Handling of leading or ending missing values in time series are handled through trimming them off before using the dataseries. This corrects a bug that series with such missing values could not be used in autocorrelation function plots or plots vs lag(s).
+o In the plotting of a variable vs its lag and in the plotting of histograms, the title of the series did not always come out correctly-it sometimes came out in an ugly complicated raw variable-name form. That has now been corrected. 
+o In creating a time-series mirror for a data frame, the partial mirror option was not working, but now it is.
+o  In the page for loading from packages the manual entry boxes were made larger to see more of title text.
+NEW CAPABILITIES
+o For correlograms, the plot-window titles of the raw series and the squared series now include the data name instead of "given series".
+
       CHANGES IN DeducerHansel VERSION 0.4-2.002 (2015-08-15)
 
 BUG FIXES

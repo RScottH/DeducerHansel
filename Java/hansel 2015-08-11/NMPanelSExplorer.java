@@ -15,7 +15,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
   ModelExplorer.java and GLMExplorer.java found in the Deducer package.
  
 The current file made adjustments to that earlier java code on 2013-06-23 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-22.
  */
 
 package hansel;
@@ -540,10 +540,21 @@ public class NMPanelSExplorer extends NMBasicExplorer implements WindowListener{
 	public void setModel(GMModel mod){
 		model = mod;
 
+                String existsHanselWorkingEnv = new String();
                 Deducer.eval("if (!exists(\".hansel.working.env\")) {\n" +
                  "    .hansel.working.env <- new.env(parent=emptyenv())\n" +
                      "}");
-                plotPanelsDevNumsName = Deducer.getUniqueName(".hansel.working.env$plotPanelsDevNums");
+                try {
+                    existsHanselWorkingEnv = Deducer.eval("as.character(exists(\".hansel.working.env\"))").asString();  
+                    }catch(Exception e){
+                    new ErrorMsg(e);
+                    }
+                if (existsHanselWorkingEnv.equals("TRUE")) {
+                    plotPanelsDevNumsName = Hansel.hanselEnv+"$plotPanelsDevNumsPS";
+                }  else {
+                    Deducer.eval(Hansel.hanselEnv+"<- new.env(parent=emptyenv())\n");
+                    plotPanelsDevNumsName = Hansel.hanselEnv+"$plotPanelsDevNumsPS";
+                }
                 Deducer.eval("library(plm)");
                 Deducer.eval(plotPanelsDevNumsName+" <-c(rep(\"\",11))"); 
 
@@ -957,7 +968,7 @@ public class NMPanelSExplorer extends NMBasicExplorer implements WindowListener{
                 ArrayList tmp = new ArrayList();
                 String timeSeriesObserved =  vName.toString();
                 
-                String urtOutputName = Deducer.getUniqueName("urtOutput");
+                String urtOutputName = Deducer.getUniqueName("urtOutputPS");
                 
                 
                  callURPlot = "par(mfrow = c(1, 1),mar=c(5,4,2,2))\n   plot(.hansel.working.env$"+urtOutputName+")";
@@ -967,6 +978,10 @@ public class NMPanelSExplorer extends NMBasicExplorer implements WindowListener{
                  
                  if(specificURTest=="Cross-sect. Augmented IPS"){
 
+                     
+                     unitRootText.removeAll();
+                     unitRootPlotPanel.removeAll();
+                     seenPlotPanels[11]=false;
                      for(int i=0;i<model.terms.getSize();i++){
 
                          call=    urtOutputName + " <- cipstest("+
@@ -979,9 +994,7 @@ public class NMPanelSExplorer extends NMBasicExplorer implements WindowListener{
                                   +",model = \""+purTestOptions.cipsModelTypeChoice
                                   +"\""+((purTestOptions.truncatedChoice)?",truncated=TRUE":"")+")";
                 
-                unitRootText.removeAll();
-                unitRootPlotPanel.removeAll();
-                seenPlotPanels[11]=false;
+
                 Deducer.eval(".hansel.working.env$"+call);
                         aeCall = urtOutputName;
                         try {    
@@ -992,20 +1005,19 @@ public class NMPanelSExplorer extends NMBasicExplorer implements WindowListener{
 
                         tmp.add("\n>"+aeCall+"\n");
                         for(int j=0;j<out.length;j++)
-                                tmp.add(out[j]);
-         
+                                tmp.add(out[j]);       
 
                  callCommandsLog += "\n   " + call;
                  callCommandsLog += "\n\n   #A text summary of the output is given by the following command:";
                  callCommandsLog += "\n   "+ aeCall;
                 }   
-                 callCommandsLog += "\n\n   #The rest of the commands result in graphic output";
+                /* callCommandsLog += "\n\n   #The rest of the commands result in graphic output";
                  callCommandsLog += "\n   JavaGD() #Opens a new graphic device; the next line results in the plotting of residuals, ACF, and PACF";
-                 callCommandsLog += "\n   "+ callURPlot.replace(".hansel.working.env$", "");
+                 callCommandsLog += "\n   "+ callURPlot.replace(".hansel.working.env$", "");*/
                  commandsLogText.setText(commandsLogText.getText()+callCommandsLog);
                  }
 
-                String textout = "";
+                String textout = "!!";
 		for(int i =0;i<tmp.size();i++)
 			textout+=tmp.get(i)+"\n";
                 this.unitRootText.setText(textout);
@@ -1277,12 +1289,12 @@ public class NMPanelSExplorer extends NMBasicExplorer implements WindowListener{
                         if(cmd==" Cancel "){  
                                 for(int i=1;i<=11;i++)
                                           Deducer.eval("dev.off("+plotPanelsDevNumsName+"["+i+"])");
-                                Deducer.eval("rm("+plotPanelsDevNumsName+")"); 
+                                Deducer.eval("rm(plotPanelsDevNumsPS,envir="+Hansel.hanselEnv+")");   
 				cancel();
                         }else if(cmd=="Initial Selections Page"){
                                 for(int i=1;i<=11;i++)
                                           Deducer.eval("dev.off("+plotPanelsDevNumsName+"["+i+"])");
-                                Deducer.eval("rm("+plotPanelsDevNumsName+")");
+                                Deducer.eval("rm(plotPanelsDevNumsPS,envir="+Hansel.hanselEnv+")");   
 				  cancel();
 				specifyClicked();
 			}else if(cmd=="Update Model"){

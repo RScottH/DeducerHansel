@@ -11,11 +11,13 @@ Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1
      DeducerPlugInExample (0.2-0 version, dated 2012-03-16)
 The code in the files of the above packages is covered by the GPLv2 licenses for those packages.
  
- The current file most notably uses a substantial amount of code from GLMDialog.java from the Deducer package.
+ The code from those packages used in this file most notably come from
+  GLMExplorerPlots.java, found in the Deducer package
+ and
+  ExampleDialog.java (dated 2010-03-12), found in the DeducerPlugInExample package.
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
- 
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-22.
  */
 
 package hansel;
@@ -61,7 +63,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 
 import org.rosuda.deducer.Deducer;
 import org.rosuda.deducer.WindowTracker;
@@ -71,13 +72,15 @@ import org.rosuda.deducer.toolkit.IconButton;
 import org.rosuda.deducer.widgets.*;
 
 
-public class DToolsDataFromPackage  extends JDialog implements ActionListener {
+
+
+public class DToolsMirrorsFromZoots  extends JDialog implements ActionListener {
         public Font font12 = new Font("serif", Font.TRUETYPE_FONT, 12);
         public Font font11 = new Font("serif", Font.TRUETYPE_FONT, 11);
         public Font font10 = new Font("serif", Font.TRUETYPE_FONT, 10);
         protected JPanel modelPanel;
         protected JScrollPane modelScroller;
-        protected JList modelList;
+        protected JList zootsList;
         protected JPanel dataPanel;
         protected JScrollPane dataScroller;
         protected JList dataList;
@@ -85,12 +88,9 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
     
 	public VariableSelectorWidget variableSelector;
 	private OkayCancelPanel okayCancelPanel;
-	private SliderWidget slider;
-	private ComboBoxWidget comboBox;
         private JCheckBox interceptIncluded ;
         protected SingleVariableWidget outcomePanel;
 	private HelpButton helpButton;
-        private VariableListWidget variableList;
         protected DJList numericList;
         protected DJList endogVarsList;
         protected DJList cointTestVarsList;
@@ -116,15 +116,14 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
        	protected JPanel subsetPanel;
         protected SubsetPanel subset;
         protected JPanel panelIndexPanel;
-        private JScrollPane  panelIndexScroller;
         private JTextArea panelIndexText;
-        protected JPanel manualDataPanel;
-        private JScrollPane  startScroller;
-        private JTextField manualDataText;
-        private JTextField manualPackageText;
-        protected JPanel manualPackagePanel;
-        private JScrollPane  endScroller;     
-        protected JLabel NoteOnData;
+        protected JPanel startPanel;
+        private JTextArea startText;
+        protected JPanel endPanel;
+        private JTextArea endText;       
+        protected JLabel NoteOnRenaming1;
+        protected JLabel NoteOnRenaming2;
+        protected JLabel NoteOnRenaming3;
         protected JComboBox newVariables;
         protected JLabel lagVariablesPanelLabel;
         protected JComboBox lagVariablesPanel;
@@ -189,38 +188,31 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
         
         protected JLabel cointOptionsLabel;
         protected JComboBox cointOption;
-	
 
-	private static DToolsDataFromPackage  theDialog;
+	private static DToolsMirrorsFromZoots  theDialog;
         protected GMModel model= new GMModel();
 	protected GMModel modelOnOpen = new GMModel();
 	protected static GMModel lastModel;
         protected static String EstimationMethodDialog;
 
         
-        public static void runit(String EstMethod,String[] packageData ) {
+        protected ButtonGroupWidget mirrorType;
+        
+        public static void runit(String EstMethod, String[] zootsobjects) {
             
                 EstimationMethodDialog = EstMethod;
 
-			theDialog = new DToolsDataFromPackage();
+			theDialog = new DToolsMirrorsFromZoots();
                         theDialog.setVisible(true);
 
-                            theDialog.dataList.setListData(packageData);
-          
-                   
-                   theDialog.setTitle(EstimationMethodDialog);
+                            theDialog.zootsList.setListData(zootsobjects);
 
-                
 		WindowTracker.addWindow(theDialog);
 
 	}
           
-        
-        
-        
 
-
-        	public DToolsDataFromPackage() {
+        	public DToolsMirrorsFromZoots() {
 		super();
 		initGUI();
                 resetModel();
@@ -232,71 +224,28 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
 			getContentPane().setLayout(thisLayout);
                         
                         {
-					dataPanel = new JPanel();
+					modelPanel = new JPanel();
 					BorderLayout varPanelLayout = new BorderLayout();
-					dataPanel.setLayout(varPanelLayout);
-					getContentPane().add(dataPanel, new AnchorConstraint(101, 375, 725, 100, 
+					modelPanel.setLayout(varPanelLayout);
+					getContentPane().add(modelPanel, new AnchorConstraint(51, 375, 725, 200, 
 							AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_NONE, 
 							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
-					dataPanel.setBorder(BorderFactory.createTitledBorder("dataset to load"));
-					dataPanel.setPreferredSize(new java.awt.Dimension(900, 230));
-                                        dataPanel.setFont(font12);
+					modelPanel.setBorder(BorderFactory.createTitledBorder(" Highlight one zoo/mts/xts/ts object"));
+					modelPanel.setFont(font12);
+                                        modelPanel.setPreferredSize(new java.awt.Dimension(250, 120));
 					{
-						dataScroller = new JScrollPane();
-						dataPanel.add(dataScroller, BorderLayout.CENTER);
+						modelScroller = new JScrollPane();
+						modelPanel.add(modelScroller, BorderLayout.CENTER);
 						{
 							ListModel varListModel = 
 								new DefaultListModel();
-							dataList = new JList();
-							dataScroller.setViewportView(dataList);
-							dataList.setModel(varListModel);
-                                                        dataList.setFont(font12);
+							zootsList = new JList();
+							modelScroller.setViewportView(zootsList);
+							zootsList.setModel(varListModel);
 						}
 					}
 				} 
                                 
-
-                                                {
-                                    manualDataPanel  = new JPanel();
-                                    getContentPane().add(manualDataPanel, new AnchorConstraint(760, 375, 725, 100, 
-							AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_NONE, 
-							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
-                                    BorderLayout modelFormulaLayout = new BorderLayout();
-                                    manualDataPanel.setLayout(modelFormulaLayout);
-                                    manualDataPanel.setBorder(BorderFactory.createTitledBorder("alternative: manual entry of dataset name"));
-                                    manualDataPanel.setFont(font12);
-                                    manualDataPanel.setPreferredSize(new java.awt.Dimension(250, 42));
-                                 }                                          
-                                    {
-                                        manualDataText = new JTextField();
-                                        manualDataPanel.add(manualDataText,BorderLayout.CENTER);
-                                        manualDataText.setEditable(true);
-                                        manualDataText.setFocusable(true);
-                                        manualDataText.setFont(font12);
-                                        
-                                    }
-                                        
-                                        
-                                        
-                                 {
-                                    manualPackagePanel  = new JPanel();
-                                    getContentPane().add(manualPackagePanel, new AnchorConstraint(760, 375, 725, 510, 
-							AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_NONE, 
-							AnchorConstraint.ANCHOR_NONE, AnchorConstraint.ANCHOR_REL));
-                                    BorderLayout modelFormulaLayout = new BorderLayout();
-                                    manualPackagePanel.setLayout(modelFormulaLayout);
-                                    manualPackagePanel.setBorder(BorderFactory.createTitledBorder("if manual, enter package if needed to avoid ambiguity"));
-                                    manualPackagePanel.setFont(font12);
-                                    manualPackagePanel.setPreferredSize(new java.awt.Dimension(300, 42));
-                                 }  
-                                 
-                                    manualPackageText = new JTextField();
-                                    manualPackagePanel.add(manualPackageText, BorderLayout.CENTER);
-                                    manualPackageText.setEditable(true);
-                                    manualPackageText.setFocusable(true);                                    
-                                    manualPackageText.setFont(font12);
-
-                        
 
 			{
 				
@@ -319,9 +268,9 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
                         
 
 			
-			this.setSize(700, 400);
+			this.setSize(500, 220);
                         this.setFont(font12);
-                        this.setTitle(EstimationMethodDialog);
+                        this.setTitle("Create dataframe mirror for a time series object");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -333,8 +282,8 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
                 variableSelector.refreshDataNames();  
                 interceptIncluded.setSelected(true);
                 panelIndexText.setText("");
-                manualDataText.setText("");
-                manualPackageText.setText("");   
+                startText.setText("");
+                endText.setText("");   
 	}
 
         
@@ -360,78 +309,38 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
 	}
 	
 	public void updateModel(){
-            String familylink;
-             String manualDataTextEntry="";
-             String manualPackageTextEntry="";
-             String downloadObject="";
-             String downloadObjectPackage="";
-             String call = "";
-             String callInfo ="";
-             manualDataTextEntry = manualDataText.getText();     
-             if (manualDataTextEntry.equals("")){
-                     
-                 if (!dataList.isSelectionEmpty()){
-                      downloadObjectPackage=dataList.getSelectedValue().toString().split("]")[0].substring(1);
-                      downloadObject = dataList.getSelectedValue().toString().split("] ")[1].split(" --")[0];
-                      call="data("+downloadObject+",package=\""+downloadObjectPackage+"\")";
-                      Deducer.execute(call);
-                 } else {
-                     // error message 
-                 }
-             } else {
-                manualPackageTextEntry = manualPackageText.getText();
-               
-                
-                if (manualPackageTextEntry.equals("")){
-                    call= "data("+manualDataTextEntry+")"; 
-                    callInfo = call;
-                } else {
-                   call= "data("+manualDataTextEntry+",package=\""+manualPackageTextEntry+"\")";
-                   callInfo = "data("+manualDataTextEntry+",package=\\\""+manualPackageTextEntry+"\\\")";
-                }
-                downloadObject = manualDataTextEntry;
-             }      
+            String ChosenObject = zootsList.getSelectedValue().toString();
+            String cmd="";
+            String classOfData = new String();
+                  try {
+                    classOfData = Deducer.eval("class("+ChosenObject+")[1]").asString();  
+                    }catch(Exception e){
+                    new ErrorMsg(e);
+                    }
             
-              String classOfData = new String();
-                      try {
-                        Deducer.eval(call+
-                                "\n class("+downloadObject+")[1]"+
-                                "\n if (class("+downloadObject+")[1]==\"ts\"||class("+downloadObject+")[1]==\"mts\"||"+
-                                "\n  class("+downloadObject+")[1]==\"xts\"||class("+downloadObject+")[1]==\"zoo\") {"+                                
-                                "\n    if (is.null(colnames("+downloadObject+") )){"+
+            if (classOfData.equals("ts")||classOfData.equals("mts")||classOfData.equals("xts")||classOfData.equals("zoo")||classOfData.equals("zooreg")){     
+                Deducer.eval(                             
+                                "\n if (is.null(colnames("+ChosenObject+") )){"+
+                                "\n      if(is.null(dim("+ChosenObject+"))) {"+
+                                "\n         dim("+ChosenObject+") <- c(length("+ChosenObject+"),1)}"+
+                                "\n    colnames("+ChosenObject+") <- \""+ChosenObject+"\""+
+                                "\n }"+
+                                "\n  dimnamesToUse <-colnames("+ChosenObject+")"+
+                                "\n  "+ChosenObject+"__<- data.frame(rbind(dimnamesToUse))"+
+                                "\n  dimnames("+ChosenObject+"__)[[2]] <-   dimnamesToUse"+
+                                "\n  rm(dimnamesToUse)");
+                              Deducer.eval("writeLines(\"         ******* New Object ******* \")");
+                              Deducer.eval("writeLines(\"A data frame called '"+ ChosenObject +"__' has been created to mirror "+ ChosenObject +".\")");
+                              Deducer.eval("writeLines(\"         ************************* \")");
+            } else {
+                 Deducer.eval("writeLines(\"         ******* New Object Not Created ******* \")");
+                 Deducer.execute("\""+ ChosenObject + " is not an object of class 'ts', 'mts', 'xts','zoo', or 'zooreg', so no dataframe object has been created to mirror it.\"");
+                 Deducer.eval("writeLines(\"         ************************************** \")");   
+            }    
 
-                                "\n      if(is.null(dim("+downloadObject+"))) {"+
-                                "\n         dim("+downloadObject+") <- c(length("+downloadObject+"),1)}"+
-                                "\n    colnames("+downloadObject+") <- \""+downloadObject+"\""+
-                                "\n    }"+
-                                "\n  dimnamesToUse <-colnames("+downloadObject+")"+
-                                "\n  "+downloadObject+"__<- data.frame(rbind(dimnamesToUse))"+
-                                "\n  dimnames("+downloadObject+"__)[[2]] <-   dimnamesToUse"+
-                                "\n  rm(dimnamesToUse)"+
-                                "\n }");/*.asString();*/
-                        String NewObjectExists ="";
-                        try {
-                            NewObjectExists = Deducer.eval("exists(\""+downloadObject+"\")").asString();  
-                            }catch(Exception e){
-                            new ErrorMsg(e);
-                            }
-                        if (NewObjectExists.equals("TRUE")){
-                           Deducer.execute("\"The object "+ downloadObject + " has been downloaded through the data() function.\n"+
-                                        "If it is an object of class 'ts', 'mts', 'xts', or 'zoo' a data frame called '"+ downloadObject +"__' has been created to mirror it.\"");
-                           } else {
-                            Deducer.execute("\"The object was not downloaded."+
-                                             " Try specifying the package name (or loading the package) if you have not done so.\"");
-                            
-                        }
-                        
-                        }catch(Exception e){
-                        new ErrorMsg(e);
-                        }
-                   
+            Deducer.execute(cmd);  
+
 	}
-           
-         
-        
 	public void setDataName(String dataName){
 		if(!dataName.equals(variableSelector.getSelectedData())){
 			variableSelector.setSelectedData(dataName);
@@ -446,6 +355,7 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
 
 	}
 
+
         public void continueClicked(){
             	updateModel();
 		if(!valid())
@@ -453,6 +363,7 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
 	
                 this.dispose();
 
+                
 	}
 	public class ManualModelInput{
 		public String input = "";
@@ -460,7 +371,7 @@ public class DToolsDataFromPackage  extends JDialog implements ActionListener {
                 public boolean runregression = false;
 	}
         
-       
+
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 

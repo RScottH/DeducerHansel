@@ -17,7 +17,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
   ExampleDialog.java (dated 2010-03-12), found in the DeducerPlugInExample package.
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-08, 2015-08-22.
  */
 
 package hansel;
@@ -518,11 +518,13 @@ public class DToolsMirrorsfromDframe  extends JDialog implements ActionListener 
             else
                 cmd = "T.S."+chosenDataFrame+"<- ts("+chosenDataFrame+",start=1,frequency=1)";  
             
-            if (mirrorType.getSelectedItemText()=="partial mirror (replace data frame with names only)"){
+            if (mirrorType.getSelectedItemText()=="partial mirror (replaces original data frame with names-only version)"){
+                 String dimnamesToUse = Deducer.getUniqueName("dimNamesToUse");
                 cmd+= 
-                 "\n dimnamesToUse <-colnames(T.S."+chosenDataFrame+")"+
-                 "\n"+chosenDataFrame+"<- data.frame(rbind(dimnamesToUse))"+
-                 "\n dimnames("+chosenDataFrame+")[[2]] <-   dimnamesToUse";
+                 "\n"+ dimnamesToUse +"<-colnames(T.S."+chosenDataFrame+")"+
+                 "\n"+chosenDataFrame+"<- data.frame(rbind("+dimnamesToUse+"))"+
+                 "\ndimnames("+chosenDataFrame+")[[2]] <- "+  dimnamesToUse +
+                 "\nrm("+dimnamesToUse+")";
             }
             
             Deducer.execute(cmd);

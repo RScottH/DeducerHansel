@@ -17,7 +17,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
   ExampleDialog.java (dated 2010-03-12), found in the DeducerPlugInExample package.
  
  The current file made adjustments to the Deducer and DeducerPlugInExample java code on 2015-03-13
- to work with the DeducerHansel package, with subsequent revision on  2015-07-30.
+ to work with the DeducerHansel package, with subsequent revision on  2015-07-30, 2015-08-22.
  */
 
 package hansel;
@@ -321,13 +321,25 @@ public class NMFinancialSExplorer extends NMBasicExplorer implements WindowListe
 	}
 	
 	public void setModel(GMModel mod){
-		model = mod;
+		model = mod;                
+                String existsHanselWorkingEnv = new String();
                 Deducer.eval("if (!exists(\".hansel.working.env\")) {\n" +
                  "    .hansel.working.env <- new.env(parent=emptyenv())\n" +
                      "}");
-                plotPanelsDevNumsName = Deducer.getUniqueName(".hansel.working.env$plotPanelsDevNums");
+                try {
+                    existsHanselWorkingEnv = Deducer.eval("as.character(exists(\".hansel.working.env\"))").asString();  
+                    }catch(Exception e){
+                    new ErrorMsg(e);
+                    }
+                if (existsHanselWorkingEnv.equals("TRUE")) {
+                    plotPanelsDevNumsName = Hansel.hanselEnv+"$plotPanelsDevNumsFS";
+                }  else {
+                    Deducer.eval(Hansel.hanselEnv+"<- new.env(parent=emptyenv())\n");
+                    plotPanelsDevNumsName = Hansel.hanselEnv+"$plotPanelsDevNumsFS";
+                }
                 Deducer.eval("library(forecast)\n library(urca)");
-                Deducer.eval(plotPanelsDevNumsName+" <-c(rep(\"\",11))");
+                Deducer.eval(plotPanelsDevNumsName+" <-c(rep(\"\",11))"); 
+                
                 
 	}
 
@@ -477,10 +489,12 @@ public class NMFinancialSExplorer extends NMBasicExplorer implements WindowListe
                         if(cmd==" Cancel "){  
                                 for(int i=1;i<=11;i++)
                                           Deducer.eval("dev.off("+plotPanelsDevNumsName+"["+i+"])");
-                                Deducer.eval("rm("+plotPanelsDevNumsName+")");                               
-                                
+                                Deducer.eval("rm(plotPanelsDevNumsCS,envir="+Hansel.hanselEnv+")");   
 				cancel();
                         }else if(cmd=="Initial Selections Page"){
+                                for(int i=1;i<=11;i++)
+                                          Deducer.eval("dev.off("+plotPanelsDevNumsName+"["+i+"])");
+                                Deducer.eval("rm(plotPanelsDevNumsCS,envir="+Hansel.hanselEnv+")");   
 				  cancel();
 				specifyClicked();
 			}else if(cmd=="Update Model"){

@@ -14,7 +14,7 @@ Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1
  The current file most notably uses code from Deducer.java in the Deducer package.
 
 The current file made adjustments to that earlier java code on 2013-07-07 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-22.
  */
 package hansel;
 

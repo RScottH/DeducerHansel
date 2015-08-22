@@ -17,7 +17,7 @@ The code in the files of the above packages is covered by the GPLv2 licenses for
   ExampleDialog.java, found in the DeducerPlugInExample package.
  
 The current file made adjustments to that earlier java code on 2013-04-11 to work with the DeducerHansel package.
- Subsequent modification dates: 2015-03-13, 2015-08-06.
+ Subsequent modification dates: 2015-03-13, 2015-08-06, 2015-08-22.
  */
 
 package hansel;
@@ -3652,7 +3652,7 @@ public class GMExplorer extends JFrame implements WindowListener{
                                 model.plotControl.previousPlot6 = true;
                             model.plotControl.traditionalGraphicsAvailable[6] = true;
                             model.plotControl.traditionalPlotBeginning[6] = /*"par(mar=c(5,4,2,2))\n"+*/
-                                 "avPlots("+pre.modelName+NameSuffix+",terms=.~"+model.efeaeplots.termsToPlot+", data="+model.dName;
+                                 "avPlots("+pre.modelName+NameSuffix+",terms=.~"+model.efeaeplots.termsToPlot;
                             model.plotControl.traditionalPlotFormula[6] = model.formula;
                             model.plotControl.traditionalPlotBeginning2[6]="in avPlots";
                             model.plotControl.showTickMarks[6] = true;
@@ -4714,7 +4714,7 @@ public class GMExplorer extends JFrame implements WindowListener{
                             } else if (cmd.equals("Partial Regression Plot")) {
                                 model.plotControl.traditionalGraphicsAvailable[3] = true;
                                 model.plotControl.traditionalPlotBeginning[3] = /*"par(mar=c(5,4,2,2))\n"+*/
-                                     "avPlots("+pre.modelName+NameSuffix+",terms=.~"+firstFourTerms+", data="+model.dName;
+                                     "avPlots("+pre.modelName+NameSuffix+",terms=.~"+firstFourTerms;
                                 model.plotControl.traditionalPlotFormula[3] = model.formula;
                                 model.plotControl.traditionalPlotBeginning2[3]="in avPlots";
                                 model.plotControl.showTickMarks[3] = true;
@@ -5912,10 +5912,18 @@ public class GMExplorer extends JFrame implements WindowListener{
 			String cmd = arg0.getActionCommand();
                         
                         if(cmd=="Cancel:Keep"){
-                                 Deducer.eval("rm("+pre.modelName.toString()+"_estPlotPanelDevNums,envir="+Deducer.guiEnv+")");
-                                 cancel();
+                               /*  Deducer.eval("rm("+pre.modelName.toString()+"_estPlotPanelDevNums,envir="+Deducer.guiEnv+")");
+                                 cancel();*/
+                               for(int i=1;i<=6;i++)
+                                          Deducer.eval("dev.off("+hanselEnvAndModelName+"_estPlotPanelDevNums"+"["+i+"])");
+                                Deducer.eval("rm("+pre.modelName.toString()+"_estPlotPanelDevNums"+",envir="+Hansel.hanselEnv+")");   
+				cancel();
+                                 
                         } else if (cmd=="Cancel:Remove"){                    
-                                      Deducer.eval("rm("+pre.modelName.toString()+"_estPlotPanelDevNums,envir="+Deducer.guiEnv+")");
+                                      for(int i=1;i<=6;i++)
+                                          Deducer.eval("dev.off("+hanselEnvAndModelName+"_estPlotPanelDevNums"+"["+i+"])");
+                                      Deducer.eval("rm("+pre.modelName.toString()+"_estPlotPanelDevNums"+",envir="+Hansel.hanselEnv+")");   
+				      cancel();
                                        
                                       String cmdivreg="";
                                       if (model.method.equals("ivreg")){
@@ -5947,6 +5955,10 @@ public class GMExplorer extends JFrame implements WindowListener{
                                  cancel();
 
                         }else if(cmd=="Initial Selections Page"){
+                                for(int i=1;i<=6;i++)
+                                          Deducer.eval("dev.off("+hanselEnvAndModelName+"_estPlotPanelDevNums"+"["+i+"])");
+                                Deducer.eval("rm("+pre.modelName.toString()+"_estPlotPanelDevNums"+",envir="+Hansel.hanselEnv+")");   
+				cancel();
 				specifyClicked(); 
                         }else if(cmd=="Classic View"){
                             classicViewClicked();
